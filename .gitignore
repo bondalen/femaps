@@ -12,6 +12,7 @@ maps/pilot/**/*.tif
 maps/pilot/**/*.tiff
 maps/pilot/**/*.png
 maps/pilot/**/*.jpg
+maps/pilot/**/*.npy
 
 # Allow small sidecar / reports under pilot
 !maps/pilot/**/*.json
