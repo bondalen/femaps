@@ -1,0 +1,646 @@
+Перейти к основному контентуСправка по использованию специальных возможностей
+Режим ИИ
+Все
+Картинки
+Видео
+Новости
+Ещё
+
+
+
+немецкие карты lage ost, lage west 1:1000000 какая проекция и какая система координат?
+18 мая 2026 г.
+Немецкие оперативные карты Верховного командования сухопутных войск Германии (OKH) «Lage Ost» и «Lage West» масштаба 1:1 000 000 основывались на официальной серии обзорных стратегических карт Третьего рейха — Weltkarte 1:1 000 000 (Всемирная карта). 
+
+english.mapywig.org
+Они имеют следующие геодезические параметры:
+Проекция: Равноугольная коническая проекция Ламберта (Lambert Conformal Conic). Для разных регионов (зон) использовались свои осевые меридианы и стандартные параллели, чтобы минимизировать искажения площади и формы объектов.
+Система координат / Датум: Пулковская обсерватория / Потсдамский датум (Potsdam Datum), привязанный к эллипсоиду Хайфорда (Hayford-Ellipsoid 1909) или эллипсоиду Бесселя (Bessel 1841). На картах присутствует стандартная градусная сетка (широта и долгота от Гринвича). 
+
+mapref.org
+📌 Важное примечание для привязки (ГИС)
+Если вы привязываете эти карты в современных геоинформационных системах (QGIS, ArcGIS):
+Не путайте сетку самой карты с немецкой военно-координатной сеткой (кодировкой) Gradnetzmeldeverfahren, которая часто наносилась поверх для передачи координат целей и позиций.
+Так как карты West и Ost охватывали огромные территории, единой координатной зоны для всей карты не существует. Привязку (Georeferencing) рекомендуется делать по явной градусной сетке (координатным перекрестиям) в проекции Lambert Conformal Conic с ручным указанием центрального меридиана конкретного листа, а затем трансформировать данные в современную систему WGS 84. 
+
+mapref.org
+ +3
+Если вы работаете с конкретным листом и у вас не сходятся координаты, укажите название или номер этого листа (например, Минск, Берлин или Балтика) — я помогу точнее определить параметры его осевой зоны.
+
+
+
+
+
+5 сайтов
+German maps 1919-1945 - WIG Map Archive (English)
+Generalstab der Luftwaffe, 7 Abteilung, a mapping unit of the German Air Force, which used re-printed Polish, Soviet and other map...
+
+
+english.mapywig.org
+Map Projections DE - MapRef.org
+MapRef.org - Map Projections DE. ... Table_title: Map Projections Germany Table_content: header: | Let's Co-ordinate! MapRef since...
+
+mapref.org
+Geographic Coordinate Systems 101: A Primer for Software… - 8th Light
+World Geodetic System 1984 (WGS84) WGS84 serves as a base in two widely used projected coordinate reference systems: EPSG:3857 and...
+
+
+8thlight.com
+Показать все
+Но как лучше установить QGIS на Windows 11? Или лучше какую-то другую GIS из бесплатных?
+19 мая 2026 г.
+Для Windows 11 QGIS — это лучший выбор среди бесплатных ГИС. По функционалу она не уступает платной ArcGIS, имеет огромное сообщество и полностью переведена на русский язык.
+Ниже приведена инструкция по правильной установке и краткий обзор альтернатив.
+Как лучше установить QGIS на Windows 11
+Для Windows 11 есть два основных способа установки. Рекомендуется использовать первый, так как он наиболее стабилен.
+Автономный установщик (Standalone Installer) — Рекомендуемый
+Зайдите на официальный сайт: qgis.org в раздел загрузок.
+Выберите «QGIS Stable» (версию с долгосрочной поддержкой — LTR). На момент 2026 года это ветка QGIS 3.34 или более новая LTR. Она самая стабильная, без багов.
+Скачайте .msi файл и запустите его. Установка проходит в пару кликов как у обычной программы.
+Сетевой установщик OSGeo4W (Для продвинутых)
+Подходит, если вам нужно часто обновлять программу или доставлять специфические библиотеки (GRASS, Saga, базы данных).
+Для новичков он сложнее, так как требует выбора пакетов вручную.
+⚠️ Важно для Windows 11: При установке и запуске старых версий QGIS (ниже 3.22) на Win 11 иногда возникали проблемы с путями и кириллицей в имени пользователя. Современные LTR-версии работают на Windows 11 «из коробки» идеально. Главное — не используйте кириллицу в путях к проектам и растрам (карты Lage Ost лучше положить в условную папку C:/GIS/, а не на Рабочий стол).
+Стоит ли смотреть другие бесплатные ГИС?
+Если вам нужна ГИС общего назначения для работы со старыми картами, полноценной замены QGIS в бесплатном сегменте нет. Но в зависимости от узких задач можно взглянуть на альтернативы:
+SAGA GIS — полностью бесплатная. Она уступает QGIS в удобстве работы с интерфейсом и оформлении карт, но сильна в анализе рельефа и геоморфологии. Часто используется как дополнение к QGIS.
+GRASS GIS — мощный академический инструмент. Имеет сложный интерфейс. Сейчас GRASS по умолчанию встроена внутрь QGIS, поэтому ставить её отдельно нет смысла.
+NextGIS QGIS — российская сборка на основе QGIS. Плюс в том, что в неё сразу вшиты удобные подложки (Росреестр, спутники) и некоторые локальные плагины. Но базовые функции те же.
+gvSIG — неплохой испанский проект, но обновляется медленнее, а сообщество на русском языке практически отсутствует.
+🚀 С чего начать работу с картами Lage Ost / West в QGIS?
+После установки QGIS:
+Откройте панель Браузер -> нажмите правой кнопкой на XYZ Tiles -> Создать новое подключение.
+Добавьте современную карту (например, OpenStreetMap или спутник Google), чтобы понимать, куда «сажать» немецкую карту.
+Установите через меню Плагины -> Управление и установка плагинов модуль Georeferencer (в свежих версиях он уже встроен в меню Растр -> Привязчик растров). С его помощью вы легко привяжете немецкие листы по крестам координатной сетки.
+На каком этапе работы с картой вы сейчас находитесь: вам нужно скачать установщик, или вы уже планируете загрузить растры карт для привязки?
+
+
+
+
+Но существует ли способ установить QGIS в Windows 11 так, чтобы она обновлялась через репозиторий, как пакеты в Linux?
+19 мая 2026 г.
+Да, в Windows 11 существует официальный способ устанавливать и обновлять программы через репозитории прямо из командной строки, в точности как apt в Ubuntu или pacman в Arch. 
+
+internet-lab.ru
+Для этого используется WinGet (Windows Package Manager) или сторонний пакетный менеджер Scoop. 
+
+learn.microsoft.com
+ +1
+Способ 1. Через встроенный WinGet (Рекомендуемый)
+WinGet — это официальный менеджер пакетов от Microsoft, который уже встроен в Windows 11 по умолчанию. Он сам скачивает нужную версию с серверов разработчиков и тихо устанавливает её. 
+
+github.com
+ +2
+Откройте Терминал Windows (или PowerShell) от имени администратора.
+Чтобы установить QGIS, введите команду:
+powershell
+winget install OSGeo.QGIS
+Используйте код с осторожностью.
+Чтобы обновить QGIS в будущем (вместе со всеми остальными программами), достаточно будет запустить:
+powershell
+winget upgrade OSGeo.QGIS
+Используйте код с осторожностью.
+Или проверить обновления вообще для всего софта на компьютере одной командой winget upgrade --all. 
+
+winstall.app
+Способ 2. Через Scoop (Для «портативной» установки)
+Scoop — это любимый разработчиками пакетный менеджер для Windows. Его главное отличие от WinGet в том, что он устанавливает все программы изолированно в вашу домашнюю директорию (C:\Users\Имя\scoop\apps). Ему не нужны права администратора, и он не засоряет системный реестр. 
+
+scoop.sh
+ +1
+Если у вас ещё нет Scoop, он ставится одной командой в PowerShell:
+powershell
+irm get.scoop.sh | iex
+Используйте код с осторожностью.
+После этого работа с QGIS выглядит так:
+Подключите расширенный репозиторий (в Scoop они называются «бакетами»):
+powershell
+scoop bucket add extras
+Используйте код с осторожностью.
+Установите QGIS:
+powershell
+scoop install qgis
+Используйте код с осторожностью.
+Для последующего обновления просто вводите:
+powershell
+scoop update qgis
+Используйте код с осторожностью.
+Резюме: что выбрать?
+Выбирайте WinGet, если хотите стандартную установку в систему «для всех пользователей».
+Выбирайте Scoop, если вы цените Linux-подход, когда у каждой программы есть четкая изолированная папка в вашем домашнем каталоге и обновление происходит гарантированно бесшовно. 
+
+learn.microsoft.com
+ +2
+Вам привычнее работать с официальными инструментами Microsoft (WinGet), или хотите попробовать Scoop, чтобы ставить программы без прав администратора?
+
+
+
+
+
+6 сайтов
+Package and distribute QGIS via Windows Store · Issue #52155
+Feature description. I am a long-time user, fan and evangelist of QGIS. One feature of the project I really like is the frequent r...
+
+github.com
+Установка приложений и управление ими с помощью WinGet
+* WinGet — это средство командной строки, позволяющее пользователям обнаруживать, устанавливать, обновлять, удалять и настраивать ...
+
+
+learn.microsoft.com
+Scoop
+What does Scoop do? Scoop installs programs you know and love, from the command line with a minimal amount of friction. It: Elimin...
+
+
+scoop.sh
+Показать все
+Но есть ли возможность устанавливать приложения Scoop не в папку пользователя а на диск D:? Чтобы не засорять C:.
+19 мая 2026 г.
+Да, в Scoop предусмотрена официальная возможность перенаправить установку всех программ на диск D:. Вы можете сделать это как при чистой установке, так и перенести уже существующий Scoop. 
+
+github.com
+ +2
+Ниже описаны оба сценария.
+Сценарий 1. Если вы ставите Scoop впервые (Чистая установка)
+Вместо стандартной команды установки вам нужно сначала объявить переменные окружения, которые укажут Scoop новые пути на диске D:. 
+
+github.com
+Откройте PowerShell (права администратора не требуются).
+Поочередно выполните следующие три команды (замените пути на свои, если хотите назвать папки иначе):
+powershell
+# Задаем путь для обычных приложений
+[environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User')
+
+# Задаем путь для глобальных приложений (если будете ставить через sudo/--global)
+[environment]::setEnvironmentVariable('SCOOP_GLOBAL', 'D:\ScoopGlobal', 'Machine')
+
+# Обновляем переменные в текущей сессии PowerShell
+$env:SCOOP='D:\Scoop'
+Используйте код с осторожностью.
+Теперь запускайте стандартный установщик Scoop:
+powershell
+irm get.scoop.sh | iex
+Используйте код с осторожностью.
+ 
+
+github.com
+Готово! Теперь сам Scoop и все скачиваемые им программы (включая QGIS) будут жить изолированно в папке D:\Scoop\apps\, совершенно не занимая место на диске C:. 
+
+scoop.sh
+Сценарий 2. Если Scoop уже установлен на диск C: (Перенос)
+Если вы уже успели поставить Scoop в папку пользователя (C:\Users\Имя\scoop), его можно перенести на диск D: без потери установленных программ. 
+
+github.com
+Закройте все программы, которые вы ставили через Scoop.
+Откройте PowerShell и пропишите новые системные пути (как в сценарии выше):
+powershell
+[environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User')
+$env:SCOOP='D:\Scoop'
+Используйте код с осторожностью.
+Физически переместите (вырежьте и вставьте) всю папку scoop из вашего профиля C:\Users\Имя\scoop в корень диска D:\ и переименуйте её в D:\Scoop.
+Чтобы Windows узнала новые пути к ярлыкам и консольным командам, выполните в PowerShell финальную команду:
+powershell
+scoop reset *
+Используйте код с осторожностью.
+ 
+
+github.com
+ +2
+После этого все ярлыки перепривяжутся к диску D:, а старая папка на C: больше не понадобится. 
+
+github.com
+ +1
+Какой сценарий вам подходит — вы настраиваете систему с нуля или нужно перенести уже готовую сборку?
+
+
+
+
+
+5 сайтов
+Safely relocate existing scoop installation directory? #3852
+* right click all shortcuts from scoop installed apps, Properties, and adjust path to new location. note that Chrome / Chromium co...
+
+
+github.com
+change install directory? · Issue #249 · ScoopInstaller/Scoop
+Copied scoop directory to another location. Restart System in Safe Mode. Rename original scoop directory to scoop_old. Made symlin...
+
+
+github.com
+Change scoop installation dir · Issue #52 - GitHub
+Make sure Scoop isn't already installed. Set the SCOOP user environment variable to the directory where you want the user's apps t...
+
+
+github.com
+Показать все
+С нуля, ранее Scoop не ставил.
+19 мая 2026 г.
+Отличный момент, чтобы сделать всё правильно с самого начала.
+Поскольку вы настраиваете систему с нуля, выполните по шагам следующие команды. Это займет не более двух минут.
+Инструкция по чистой установке Scoop на диск D:
+Нажмите клавиши Win + X и выберите Терминал (или просто найдите и откройте PowerShell через поиск Пуска). Права администратора не нужны.
+Перед установкой разрешите выполнение скриптов в вашей системе (это стандартное требование Windows для сторонних скриптов):
+powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Используйте код с осторожностью.
+(Если появится запрос, нажмите Y и Enter).
+Задайте системный путь для Scoop на диск D:. Скопируйте и выполните эти команды:
+powershell
+[environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User')
+$env:SCOOP='D:\Scoop'
+Используйте код с осторожностью.
+Теперь запустите сам процесс установки:
+powershell
+irm get.scoop.sh | iex
+Используйте код с осторожностью.
+После завершения в консоли появится надпись, что Scoop успешно установлен. Вы можете зайти на диск D: и убедиться, что там появилась папка Scoop.
+Установка QGIS через новый Scoop
+Теперь, когда пакетный менеджер привязан к диску D:, можно ставить саму ГИС. Пропишите в консоли две команды:
+Подключите репозиторий с расширенным софтом (где и лежит QGIS):
+powershell
+scoop bucket add extras
+Используйте код с осторожностью.
+Запустите установку QGIS:
+powershell
+scoop install qgis
+Используйте код с осторожностью.
+Scoop сам скачает QGIS, распакует её в D:\Scoop\apps\qgis и автоматически создаст ярлык в меню «Пуск». Диск C: останется абсолютно чистым.
+Хотите сразу настроить автоматическое удаление кэша установщиков, чтобы скачанные .msi и .zip файлы после установки QGIS не занимали лишнее место на диске D:?
+
+
+
+
+Но как будут выглядеть эти команды, если моя папка пользователя сейчас C:\Users\Admin?
+19 мая 2026 г.
+Тот факт, что ваша папка пользователя называется C:\Users\Admin, никак не меняет сами команды. Переменная [environment]::setEnvironmentVariable работает на уровне всей операционной системы и сама понимает, куда вносить изменения.
+Вам нужно просто скопировать и вставить команды в Терминал «один в один». Полноценный скрипт для вашей конфигурации будет выглядеть следующим образом:
+Откройте PowerShell и разрешите запуск скриптов:
+powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Используйте код с осторожностью.
+Направьте Scoop на диск D: (Windows сама запишет этот путь в настройки профиля Admin):
+powershell
+[environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User')
+$env:SCOOP='D:\Scoop'
+Используйте код с осторожностью.
+Запустите установку:
+powershell
+irm get.scoop.sh | iex
+Используйте код с осторожностью.
+💡 Что произойдет под капотом:
+Windows зайдет в ваш реестр по адресу HKEY_CURRENT_USER\Environment (который как раз принадлежит пользователю Admin).
+Создаст там запись, что папка Scoop теперь находится в D:\Scoop.
+Сам установщик скачает файлы не в C:\Users\Admin\scoop, а сразу в корень диска D:\.
+После этого вы можете сразу переходить к подключению репозитория (scoop bucket add extras) и установке QGIS (scoop install qgis).
+Запустить установку прямо сейчас, или хотите сначала включить функцию автоочистки кэша, чтобы Scoop сразу удалял за собой временные гигабайты установщиков софта?
+
+
+
+
+То есть нет необходимости выполнять команду [environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User') изменив её на [environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'Admin')?
+19 мая 2026 г.
+Нет, менять 'User' на 'Admin' ни в коем случае нельзя, иначе команда выдаст ошибку.
+Слово 'User' в данном коде — это не имя вашего пользователя (не Admin), а неизменяемый технический параметр (перечисление/Enums в языке C# и .NET). Он указывает операционной системе Windows уровень размещения переменной.
+В Windows бывает всего три таких уровня:
+'Process' — переменная создается только для текущего открытого окна консоли.
+'User' — переменная создается для текущего вошедшего пользователя (в вашем случае система сама поймет, что это Admin, и запишет её в ваш профиль).
+'Machine' — переменная создается глобально для всей операционной системы (для всех учетных записей компьютера).
+Поэтому оставляйте команду ровно в таком виде:
+powershell
+[environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User')
+Используйте код с осторожностью.
+Windows автоматически применит её конкретно к вашей учетной записи C:\Users\Admin.
+Вы готовы запустить установку, или у вас остались вопросы по переменным окружения Windows?
+
+
+
+
+С переменными всё понятно, спасибо! Но подскажите ещё такой вопрос. Если бы я на основе растра вышеуказанной карты захотел бы оцифровать какой либо слой, например населенных пунктов, дорожной сети или гидрографии, с привлечением искусственного интеллекта, то какое программное обеспечение мне понадобилось бы ещё, кроме QGIS?
+19 мая 2026 г.
+Для автоматической оцифровки старых карт (векторизации дорог, рек или городов) с помощью искусственного интеллекта стандартных инструментов QGIS из коробки будет мало. Вам понадобятся специализированные нейросетевые инструменты, которые умеют распознавать графику на исторических растрах.
+В зависимости от вашего опыта в программировании, вам подойдет один из трех вариантов ПО:
+Вариант 1. Модули внутри самой QGIS (Без стороннего ПО)
+Вам не придется выходить из QGIS, но нужно будет установить плагины, которые используют ИИ под капотом:
+Segment Anything (SAM) в QGIS (плагины Geo-SAM или SAM Tool) — подключает мощную нейросеть от Meta. Вы кликаете по объекту (например, контуру озера или лесного массива), а ИИ сам мгновенно обводит его попиксельно.
+Deepness (Deep Learning In GIS) — отличный плагин для QGIS, который позволяет загружать готовые обученные ИИ-модели (в формате ONNX) для сегментации дорог или строений прямо внутри интерфейса ГИС.
+Вариант 2. Программное обеспечение «Кликни и готово» (No-Code ИИ)
+Если вы не хотите писать код, но плагинов QGIS не хватает, используйте готовые программы с ИИ-инструментами:
+Roboflow или CVAT (Computer Vision Annotation Tool) — бесплатные веб-инструменты/ПО. Вы загружаете туда фрагменты немецкой карты, размечаете вручную 10–20 участков (показываете нейросети, как выглядят дороги или значки городов именно на Lage Ost), и система сама обучает модель для распознавания остальной карты. Результат экспортируется в Shapefile/GeoJSON для QGIS.
+ArcGIS Pro (Платное ПО) — упоминается как альтернатива, так как имеет встроенный мощный модуль ArcGIS Deep Learning, в котором есть готовые предобученные модели для распознавания дорожных сетей и водных объектов по растрам.
+Вариант 3. Python-скрипты (Для максимального качества)
+Исторические карты (особенно военные Lage Ost / West) очень «шумные»: на них много тактических знаков, надписей и штриховки, из-за чего стандартные ИИ часто путаются. Лучший мировой опыт оцифровки таких карт — это связка Python + QGIS.
+Вам понадобятся библиотеки:
+Segment Anything 2 (SAM 2) от Meta — для точного выделения гидрографии и лесов.
+YOLOv8 / YOLOv11 — лучшая нейросеть для поиска точечных объектов. Её обучают «искать» специфические немецкие топографические знаки населенных пунктов или аэродромов.
+OpenCV — библиотека компьютерного зрения для предварительной очистки карты (например, чтобы убрать координатную сетку Gradnetzmeldeverfahren перед тем, как запускать ИИ, чтобы она не разрывала линии дорог).
+С чего лучше начать?
+Рекомендуется начать с установки плагина Deepness или Geo-SAM прямо внутри вашей новой QGIS. Они позволят прямо на диске D: задействовать мощности вашей видеокарты для распознавания объектов без установки тяжелого программирувого софта.
+Вы хотите попробовать использовать готовые плагины с ИИ внутри QGIS, или вам интереснее разобраться, как обучить нейросеть с нуля под конкретные условные знаки немецких карт?
+
+
+
+
+Но какие варианты являются бесплатными?
+19 мая 2026 г.
+Все три описанных подхода (кроме ArcGIS Pro) имеют абсолютно бесплатные варианты, которые не потребуют от вас покупки лицензий.
+Вот список лучших бесплатных ИИ-инструментов, которые вы можете использовать совместно с QGIS:
+1. Бесплатные плагины прямо внутри QGIS
+Вам не нужно устанавливать сторонний софт, достаточно зайти в меню Плагины вашей QGIS:
+Deepness (Deep Learning In GIS) — 100% бесплатный плагин с открытым исходным кодом. Он позволяет запускать готовые ИИ-модели (в формате .onnx) прямо над вашей картой. Вы можете скачать бесплатные предобученные модели для распознавания дорог или лесов.
+Geo-SAM или SAM Tool — бесплатные плагины, которые скачивают официальную открытую нейросеть Meta Segment Anything (SAM). Вы кликаете мышкой по реке или лесу на немецкой карте, а ИИ сам бесплатно и мгновенно обводит весь контур.
+2. Бесплатные No-Code платформы (для обучения ИИ без кода)
+Если плагины не справляются с шумом на карте Lage Ost и вам нужно обучить ИИ распознавать конкретные немецкие значки городов или дорог:
+CVAT (Computer Vision Annotation Tool) — полностью бесплатный инструмент с открытым кодом (разработанный изначально Intel). Его можно запустить прямо в браузере или установить локально на компьютер. Вы загружаете туда куски карты, обводите примеры дорог/городов, и встроенные ИИ-инструменты помогают разметить остальное.
+Roboflow — имеет щедрый бесплатный тариф (Public/Community Plan). Вы можете загрузить туда фрагменты карт, разметить условные знаки, и платформа бесплатно выделит вам мощности на своих серверах для обучения нейросети. Результат распознавания можно скачать в векторном формате для QGIS.
+3. Бесплатные библиотеки Python (для продвинутых)
+Вся индустрия современного искусственного интеллекта построена на открытом коде. Если вы захотите автоматизировать процесс через скрипты, эти инструменты полностью бесплатны:
+Ultralytics YOLO (v8 / v11) — самая популярная в мире бесплатная нейросеть для поиска объектов. Идеально подходит, чтобы «натравить» её на карту и заставить находить все точечные значки (например, знаки немецких аэродромов, станций или хуторов).
+Segment Anything 2 (SAM 2) — открытая библиотека от Meta AI. Лучший в мире бесплатный инструмент для выделения сложных площадных объектов (леса, болота, озера).
+💡 С чего начать без затрат?
+Установите плагин SAM Tool в QGIS. Он использует бесплатную модель от Meta, работает локально на вашем компьютере (используя процессор или видеокарту) и позволяет оцифровывать реки и леса в разы быстрее, чем если бы вы обводили их вручную точками.
+Хотите, я подробно распишу, как после установки QGIS найти и настроить бесплатный плагин SAM для быстрой обводки объектов на карте?
+
+
+
+
+
+Windows PowerShell update message FAQ - PowerShell | Microsoft Learn
+Получил ошибку:Windows PowerShellCopyright (C) Microsoft Corporation. All rights reserved.Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindowsPS C:\WINDOWS\system32> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUserPS C:\WINDOWS\system32> [environment]::setEnvironmentVariable('SCOOP', 'D:\Scoop', 'User')PS C:\WINDOWS\system32> $env:SCOOP='D:\Scoop'PS C:\WINDOWS\system32> irm get.scoop.sh | iexInitializing...Downloading...Extracting...Creating shim...Adding D:\Scoop\shims to your path.Scoop was installed successfully!Type 'scoop help' for instructions.PS C:\WINDOWS\system32> scoop bucket add extrasERROR Git is required for buckets. Run 'scoop install git' and try again.PS C:\WINDOWS\system32>
+19 мая 2026 г.
+Это не ошибка самой системы, а абсолютно стандартное рабочее предупреждение Scoop. Вы всё сделали абсолютно правильно, и сам Scoop успешно установился на ваш диск D:!
+Дело в том, что для подключения любых дополнительных репозиториев (бакетов), включая extras, программе Scoop жизненно необходима утилита Git (система контроля версий). Через неё он скачивает списки доступных программ.
+Прямо в этом же окне консоли выполните две простые команды:
+Установите Git (Scoop сам скачает и настроит его на диске D:):
+powershell
+scoop install git
+Используйте код с осторожностью.
+После завершения установки Git повторите подключение репозитория:
+powershell
+scoop bucket add extras
+Используйте код с осторожностью.
+Как только бакет extras успешно добавится, вы сможете запустить финальную команду для установки вашей ГИС:
+powershell
+scoop install qgis
+Используйте код с осторожностью.
+Напишите, всё ли прошло гладко после установки Git, или на этапе скачивания QGIS возникли новые вопросы?
+
+
+
+
+PS C:\WINDOWS\system32> scoop install gitInstalling '7zip' (26.01) [64bit] from 'main' bucket7z2601-x64.msi (1,9 MB) [=====================================================================================] 100%Checking hash of 7z2601-x64.msi ... ok.Extracting 7z2601-x64.msi ... done.Linking D:\Scoop\apps\7zip\current => D:\Scoop\apps\7zip\26.01Creating shim for '7z'.Creating shim for '7zG'.Making D:\Scoop\shims\7zg.exe a GUI binary.Creating shim for '7zFM'.Making D:\Scoop\shims\7zfm.exe a GUI binary.Creating shortcut for 7-Zip\7-Zip File Manager (7zFM.exe)Creating shortcut for 7-Zip\7-Zip Help (7-zip.chm)Persisting CodecsPersisting FormatsRunning post_install script...done.'7zip' (26.01) was installed successfully!Notes-----To register the context menu entry, please execute the following command:reg import "D:\Scoop\apps\7zip\current\install-context.reg"If an error occurs while attempting to delete files during uninstallation, run the following command and then retry:Stop-Process -Name 'explorer'Installing 'git' (2.54.0) [64bit] from 'main' bucketPortableGit-2.54.0-64-bit.7z.exe (56,3 MB) [==================================================================] 100%Checking hash of PortableGit-2.54.0-64-bit.7z.exe ... ok.Extracting PortableGit-2.54.0-64-bit.7z.exe ... done.Running pre_install script...done.Linking D:\Scoop\apps\git\current => D:\Scoop\apps\git\2.54.0Creating shim for 'sh'.Creating shim for 'git'.Creating shim for 'git-bash'.Making D:\Scoop\shims\git-bash.exe a GUI binary.Creating shim for 'gpg'.Creating shim for 'gpg-agent'.Creating shim for 'gpgconf'.Creating shim for 'gpg-connect-agent'.Creating shim for 'pinentry'.Making D:\Scoop\shims\pinentry.exe a GUI binary.Creating shortcut for Git\Git Bash (git-bash.exe)Creating shortcut for Git\Git CMD (git-cmd.exe)Creating shortcut for Git\Git GUI (git-gui.exe)Adding D:\Scoop\apps\git\current\cmd to your path.Running post_install script...done.'git' (2.54.0) was installed successfully!Notes-----To register file associations, please execute the following command:reg import "D:\Scoop\apps\git\current\install-associations.reg"To register the context menu entry, please execute the following command:reg import "D:\Scoop\apps\git\current\install-context.reg"To set Git Credential Manager Core for portable Git, please execute the following command:git config --system credential.helper managerPS C:\WINDOWS\system32>
+19 мая 2026 г.
+Отлично, Git (и архиватор 7-Zip) успешно установились на диск D:!
+Теперь все технические препятствия позади. Прямо в этом же окне консоли введите финальные две команды для добавления репозитория и установки ГИС:
+Подключите расширенный репозиторий софта:
+powershell
+scoop bucket add extras
+Используйте код с осторожностью.
+Запустите установку QGIS:
+powershell
+scoop install qgis
+Используйте код с осторожностью.
+Scoop сам скачает QGIS, развернет её в вашу папку D:\Scoop\apps\qgis и создаст ярлык в меню «Пуск».
+Если после этого вы захотите сразу включить автоматическую очистку кэша (чтобы Scoop в будущем стирал за собой скачанные тяжелые инсталляторы и экономил место на диске D:), напишите — я скину короткую команду настройки.
+
+
+
+
+PS C:\WINDOWS\system32> scoop bucket add extrasChecking repo... OKThe extras bucket was added successfully.PS C:\WINDOWS\system32> scoop install qgisCouldn't find manifest for 'qgis'.PS C:\WINDOWS\system32>
+19 мая 2026 г.
+Ошибку Couldn't find manifest for 'qgis' Scoop выдал потому, что его локальная база данных еще не успела синхронизироваться и «увидеть» содержимое только что подключенного репозитория extras.
+Чтобы исправить это, нужно обновить сам Scoop, чтобы он подтянул индексы всех программ из нового бакета. 
+Прямо там же в консоли выполните две короткие команды:
+Обновите базу данных Scoop:
+powershell
+scoop update
+Используйте код с осторожностью.
+Повторите установку QGIS:
+powershell
+scoop install qgis
+Используйте код с осторожностью.
+💡 Полезный совет на будущее (Автоочистка)
+Так как QGIS — программа объемная (установщик весит больше 1 ГБ), Scoop после успешной распаковки сохранит этот скачанный инсталлятор в свой кэш на диске D:. Чтобы этот временный файл не лежал там мертвым грузом, вы можете один раз включить автоочистку кэша следующей командой: 
+
+mentormost.com
+powershell
+scoop config purge_cache true
+Используйте код с осторожностью.
+После этого Scoop будет автоматически стирать все скачанные .msi и .zip файлы сразу после того, как установит программу.
+Напишите, пошел ли процесс загрузки QGIS после обновления базы данных?
+
+
+
+
+
+2 сайта
+I try to use "scoop" to install symfony-cli but every time I get the ...
+2 Answers. Sorted by: 5. Looks like there is still a bug in scoop https://jonathansoma.com/everything/setup/scoop-issues/ I have g...
+
+stackoverflow.com
+Step-by-step guide to install the latest version of QGIS - Mentormost.com
+Select QGIS Standalone Installer (Latest Release) to download the offline installer (approx. size = 1.2 GB). You can choose the On...
+
+
+mentormost.com
+PS C:\WINDOWS\system32> scoop updateUpdating Scoop...Updating Buckets...INFO Converting 'main' bucket to git repo...The main bucket was removed successfully.Checking repo... OKThe main bucket was added successfully.Scoop was updated successfully!PS C:\WINDOWS\system32> scoop install qgisCouldn't find manifest for 'qgis'.PS C:\WINDOWS\system32>
+19 мая 2026 г.
+Эта заминка происходит из-за того, что Scoop ищет совпадение по имени манифеста во встроенных бакетах, а в официальном репозитории extras манифест QGIS в настоящее время отсутствует. Пакетные менеджеры иногда меняют состав репозиториев, но решить этот вопрос можно очень быстро. 
+
+justjensen.co
+Выполните поиск программы во всех известных бакетах Scoop с помощью встроенной команды:
+powershell
+scoop search qgis
+Используйте код с осторожностью.
+⚡️ Возможные сценарии исправления:
+Если поиск выдал правильное имя бакета (например, gis или versions):
+Scoop покажет в консоли, в каком именно бакете лежит манифест. Вам останется лишь подключить его. Например:
+powershell
+scoop bucket add <название_бакета>
+scoop install qgis
+Используйте код с осторожностью.
+Если поиск ничего не нашел (QGIS убрали из публичных бакетов):
+Это значит, что Scoop в данный момент не имеет готового стороннего скрипта для тихой установки QGIS. В таком случае лучшим и самым чистым решением, чтобы не засорять диск C:, будет использование официального автономного инсталлятора, скачанного с сайта qgis.org.При его запуске вы сможете вручную перенаправить путь установки: вместо стандартного C:\Program Files\QGIS просто укажите папку D:\QGIS\. Программа установится туда, а диск C: останется нетронутым. 
+
+justjensen.co
+ +1
+Посмотрите, пожалуйста, что выдает команда scoop search qgis. Нашла ли она альтернативный репозиторий?
+
+
+
+
+
+2 сайта
+Setting Up Scoop as a Windows Package Manager
+Scooping up the Mess. For most users, Scoop is probably a worse tool. It's focused primarily on developer tools, and doesn't have ...
+
+
+justjensen.co
+GIS Software and Tutorials: QGIS Installation Guide
+QGIS Installation Guide - GIS Software and Tutorials - Research Guides at Washington University in St. Louis. * GIS Software and T...
+
+libguides.wustl.edu
+PS C:\WINDOWS\system32> scoop search qgisWARN No matches found.PS C:\WINDOWS\system32> scoop search qgisWARN No matches found.PS C:\WINDOWS\system32>
+19 мая 2026 г.
+Так как в стандартных репозиториях main и extras готового манифеста для QGIS действительно не оказалось (сообщество разработчиков ГИС ведет сторонние бакеты), мы решим эту задачу двумя путями на выбор. Оба варианта гарантируют, что диск C: останется абсолютно чистым, а программа будет развернута на диске D:. 
+
+github.com
+Вариант 1. Использование официального WinGet (Быстро и автоматически)
+Поскольку Scoop не нашел манифест, самый простой способ поставить QGIS через консоль — использовать встроенный в Windows пакетный менеджер WinGet. Он отлично знает QGIS. Чтобы он установил её сразу на диск D:, ему просто нужно передать специальный аргумент пути.
+Прямо в этом же окне PowerShell выполните одну команду:
+powershell
+winget install OSGeo.QGIS --location "D:\QGIS"
+Используйте код с осторожностью.
+Что произойдет: WinGet скачает официальный стабильный установщик QGIS и полностью развернет программу в папку D:\QGIS. Обновлять её в будущем можно будет простой командой winget upgrade OSGeo.QGIS.
+Вариант 2. Сторонний бакет для Scoop (Если принципиально использовать Scoop)
+Если вы хотите управлять программой строго через Scoop, нам нужно подключить пользовательский репозиторий, где энтузиасты поддерживают ГИС-софт: 
+
+github.com
+Подключите сторонний бакет разработчика wale:
+powershell
+scoop bucket add wale https://github.com/wale/scoop-bucket
+Используйте код с осторожностью.
+Запустите установку:
+powershell
+scoop install wale/qgis
+Используйте код с осторожностью.
+ 
+
+github.com
+Что произойдет: Scoop скачает манифест из этого репозитория и установит QGIS в вашу настроенную папку D:\Scoop\apps\qgis.
+Какой вариант выбрать?
+Рекомендуется Вариант 1 (WinGet) — это официальный инструмент от Microsoft, он всегда подтягивает самые актуальные и стабильные релизы напрямую с серверов qgis.org. 
+
+scoop.sh
+ +1
+Каким способом воспользуемся, чтобы наконец запустить установку ГИС?
+
+
+
+
+
+4 сайта
+Scoop installer for windows · Issue #50677 · qgis/QGIS - GitHub
+Feature description. QGIS is very difficult to install on Windows if the user does not have admin rights. This is a problem a lot ...
+
+
+github.com
+Scoop
+What does Scoop do? * Eliminates permission popup windows. * Hides GUI wizard-style installers. * Prevents PATH pollution from ins...
+
+
+scoop.sh
+Commits · wale/scoop-bucket - GitHub
+Commits on Apr 20, 2024. qgis: Update to version 3.36.2-1. github-actions[bot] committed on Apr 19, 2024. 4c6d48d. Copy full SHA f...
+
+github.com
+Показать все
+как установить в D:\Program_Files с помощью winget install OSGeo.QGIS --location "D:\QGIS"?
+19 мая 2026 г.
+Для установки программы в нужную вам папку D:\Program_Files достаточно просто заменить путь внутри кавычек в параметре --location. 
+
+learn.microsoft.com
+Поскольку в названии папки присутствует нижнее подчеркивание (Program_Files), а не пробел, команда отработает без сбоев.
+Скопируйте и выполните в Терминале следующую команду:
+powershell
+winget install OSGeo.QGIS --location "D:\Program_Files"
+Используйте код с осторожностью.
+⚠️ Важный нюанс при работе с WinGet
+Параметр --location принудительно заставляет инсталлятор развернуть файлы программы по указанному пути. Однако некоторые типы установщиков (особенно сложные ГИС-пакеты) могут проигнорировать этот флаг из консоли и попытаться установиться по умолчанию на диск C:. 
+
+superuser.com
+ +3
+Если вы запустите команду и увидите, что программа всё равно устанавливается на диск C:, прервите процесс и используйте интерактивный режим: 
+
+superuser.com
+powershell
+winget install OSGeo.QGIS -i
+Используйте код с осторожностью.
+Флаг -i (Interactive) запустит привычное графическое окно установки QGIS, где вы сможете нажать кнопку «Обзор» (Browse) и вручную кликом мышки выбрать созданную папку D:\Program_Files. При этом программа всё так же останется на учете у пакетного менеджера WinGet для последующих обновлений. 
+
+superuser.com
+После завершения установки мы сможем сразу проверить корректность путей или перейти к запуску QGIS. С какого режима начнете установку — с тихого или интерактивного?
+
+
+
+
+
+4 сайта
+How to change the install location of "winget"? - Super User
+2 Answers. Sorted by: 17. This answer is not useful. Loading when this answer was accepted… This feature is proposed in Can the so...
+
+
+superuser.com
+install command (winget) - Microsoft Learn
+Aliases. The following aliases are available for this command: add. Table_title: Arguments Table_content: header: | Argument | Des...
+
+
+learn.microsoft.com
+Change install location with WinGet - Techielass
+Sarah Lean. 05 Oct 2021 • 2 min read. Change install location with WinGet. Windows Package Manager is a great tool that can be use...
+
+
+www.techielass.com
+Показать все
+успешно установлено на диск D:.
+19 мая 2026 г.
+Поздравляю! Вы успешно развернули QGIS на диске D:\Program_Files, сохранив системный диск C: в идеальной чистоте, и при этом у вас настроен удобный пакетный менеджер для обновлений.
+Теперь ваша ГИС полностью готова к работе с историческими картами «Lage Ost» и «Lage West».
+Для плавного старта и оцифровки объектов с помощью искусственного интеллекта (как мы планировали ранее), сделайте первые три шага в программе:
+Запустите QGIS (ярлык должен появиться в меню «Пуск» или на рабочем столе).
+Включите модуль привязки: В верхнем меню выберите Растр (Raster) -> Привязчик растров... (Georeferencer) [1]. Это встроенное окно, где вы откроете растр немецкой карты и расставите точки по пересечениям координатной сетки (введя градусы широты и долготы) для точной посадки на местность.
+Установите ИИ-помощника: Зайдите в меню Плагины (Plugins) -> Управление и установка плагинов... -> в строке поиска введите SAM Tool (или Deepness) и нажмите Установить.
+Если при привязке конкретного листа немецкой карты (вводе координат сетки) или при первом запуске ИИ-плагина у вас возникнут вопросы по настройке, дайте знать — мы разберем их пошагово! Какой лист или регион карты планируете привязать первым?
+
+
+
+
+В меню Растр (Raster) отсутствует Привязчик растров... (Georeferencer)
+19 мая 2026 г.
+Всё в порядке, это не ошибка программы. В современных версиях QGIS инструмент перенесли в другое меню, так как теперь он умеет привязывать не только растровые изображения (картинки), но и векторные слои. 
+
+github.com
+ +1
+Теперь запуск осуществляется из другого места:
+Посмотрите на верхнюю панель и откройте меню Слой (Layer).
+Примерно в середине списка вы увидите пункт Привязчик растров... (Georeferencer). 
+
+www.qgistutorials.com
+ +3
+Если инструмента нет и в меню «Слой»
+В редких случаях в свежеустановленной программе встроенный модуль может быть просто отключен в настройках. Включить его можно за пару кликов: 
+
+gis.stackexchange.com
+Откройте в главном меню Плагины (Plugins) -> Управление и установка плагинов... (Manage and Install Plugins...).
+Перейдите на вкладку Установленные (Installed) в левой части окна.
+Найдите в списке пункт Georeferencer GDAL и просто поставьте напротив него галочку. 
+
+mapping.share.library.harvard.edu
+ +2
+После этого пункт гарантированно появится в меню Слой -> Привязчик растров... 
+
+www.mapping101.com
+ +1
+Удалось найти инструмент в новом меню? Если окно привязчика успешно открылось, мы можем разобрать, какой тип трансформации лучше выбрать для правильной посадки карт Lage Ost / West.
+
+
+
+
+
+11 сайтов
+Georeferencing Topo Sheets and Scanned Maps (QGIS3)
+Procedure. Open QGIS and click on Raster ‣ Georeferencer to open the tool. Note. From QGIS versions 3.26 onwards, the Georeference...
+
+
+www.qgistutorials.com
+Georefering plugin missing · Issue #58940 · qgis/QGIS - GitHub
+nicogodet commented. nicogodet. on Oct 2, 2024. Member. See multiples existing issues (eg. # 49768) Not a bug, Georeferencer has b...
+
+github.com
+Help where is the Georeference in "QGIS 3.28.13 - Facebook
+QGIS Tip: Georeferencing as of v3.26 Because it has been asked again and again lately: Yes, as of QGIS 3.26, georeferencing is loc...
+
+
+www.facebook.com
+Показать все
+Задайте вопрос
+
+

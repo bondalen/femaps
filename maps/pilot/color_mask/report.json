@@ -1,0 +1,42 @@
+{
+  "reference_id": 1,
+  "status": "ok",
+  "method": "snap_ridge + optional skeleton path",
+  "clip_shape": [
+    4936,
+    4356
+  ],
+  "params": {
+    "target_res_deg": 6e-05,
+    "corridor_m": 400,
+    "simplify_tol_m": 280,
+    "chaikin_iters": 2,
+    "snap_step_m": 500,
+    "min_elongation": 1.8
+  },
+  "metrics_raw": {
+    "length_m": 44780.7,
+    "reference_length_m": 41426.4,
+    "mean_ref_offset_m": 1372.5,
+    "hausdorff_m": 5609.1,
+    "ref_points_within_200m_pct": 24.0,
+    "vertex_count": 83
+  },
+  "metrics_smoothed": {
+    "length_m": 42101.4,
+    "reference_length_m": 41426.4,
+    "mean_ref_offset_m": 1422.9,
+    "hausdorff_m": 5609.1,
+    "ref_points_within_200m_pct": 16.0,
+    "vertex_count": 21
+  },
+  "outputs": {
+    "score": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/00_score.png",
+    "mask": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/01_mask_corridor.png",
+    "skeleton": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/02_skeleton.png",
+    "overlay_raw": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/03_overlay_raw.png",
+    "overlay": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/03_overlay.png",
+    "best_match_raw": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/best_match_raw.gpkg",
+    "best_match": "/mnt/d/projects/26-0523_maps/maps/pilot/color_mask/best_match.gpkg"
+  }
+}

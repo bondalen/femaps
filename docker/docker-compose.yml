@@ -1,0 +1,27 @@
+services:
+  maps-postgis:
+    image: postgis/postgis:16-3.5
+    container_name: maps-postgis
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: maps_db
+      POSTGRES_USER: maps_user
+      POSTGRES_PASSWORD: maps_pass
+    volumes:
+      - maps_postgis_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  maps-martin:
+    image: ghcr.io/maplibre/martin:latest
+    container_name: maps-martin
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://maps_user:maps_pass@maps-postgis/maps_db
+    depends_on:
+      - maps-postgis
+    restart: unless-stopped
+
+volumes:
+  maps_postgis_data:

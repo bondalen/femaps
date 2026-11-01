@@ -1,0 +1,51 @@
+# --- Large map rasters / georef (keep local; not for GitHub) ---
+maps/rastr/**
+!maps/rastr/.gitkeep
+maps/georef/**
+!maps/georef/.gitkeep
+!maps/georef/**/*.points
+!maps/georef/**/*.xml
+!maps/georef/**/*.prj
+maps/mosaic/**
+!maps/mosaic/.gitkeep
+maps/pilot/**/*.tif
+maps/pilot/**/*.tiff
+maps/pilot/**/*.png
+maps/pilot/**/*.jpg
+
+# Allow small sidecar / reports under pilot
+!maps/pilot/**/*.json
+!maps/pilot/**/*.md
+
+# --- Secrets / env ---
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+~/venvs/
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+**/*:Zone.Identifier
+.idea/
+.vscode/
+*.code-workspace
+
+# --- QGIS local junk ---
+*.qgd
+*.qgis~*
+*.gpkg-wal
+*.gpkg-shm
+
+# --- Cursor local ---
+.cursor/mcp.json
+.cursor/mcp.json.bak*
