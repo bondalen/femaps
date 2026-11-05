@@ -8,6 +8,8 @@
 |----------|------------|
 | [glossary.md](glossary.md) | Термины раздела |
 | [26-1101_presentation_sketch.md](26-1101_presentation_sketch.md) | Эскиз желаемых de/en-деревьев, рёбра, свёртка |
+| [sovereign_transformation.md](sovereign_transformation.md) | Закрытый перечень трансформаций суверена (аналог реорганизации ЮЛ) |
+| [sovereign_class_diagram.md](sovereign_class_diagram.md) | Схема классов: жизненный цикл `sovereign` и `sovereign_link` |
 | `scripts/sql/010_org_name_forms.sql` | DDL схемы `org` (текущее состояние в БД) |
 | `docs/chat/plan/26-1029_01_states_orgs.md` | План работ чата |
 | `docs/26-1029_onto_and_db.md` | Предыстория: состав vs управление, KStN, государство |
@@ -124,6 +126,7 @@ sovereign_name_form      — суверен × name_form × [valid_from, valid_t
 | Миграция ребра → `edge` + `edge_label` | планируется |
 | Seed v0 (вершины, рёбра, DE/EN, Japan/Germany/…) | планируется |
 | VIEW / функция «дерево для языка L» | планируется |
+| Словарь трансформаций суверена (аналог ЮЛ) | зафиксирован в [sovereign_transformation.md](sovereign_transformation.md); DDL событий — позже |
 | Таблицы ВС / коалиций | позже, тот же schema `org` или смежно |
 
 ---
