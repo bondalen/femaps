@@ -7,7 +7,8 @@
 | Артефакт | Назначение |
 |----------|------------|
 | [glossary.md](glossary.md) | Термины раздела |
-| [26-1101_presentation_sketch.md](26-1101_presentation_sketch.md) | Эскиз желаемых de/en-деревьев, рёбра, свёртка |
+| [26-1101_presentation_sketch.md](26-1101_presentation_sketch.md) | Эскиз de/en (ранний; историографические полки DE) |
+| [26-1102_presentation_sketch.md](26-1102_presentation_sketch.md) | Эскиз UI de/en/ru v0: официальные имена, AT/RU, туннели |
 | [sovereign_transformation.md](sovereign_transformation.md) | Закрытый перечень трансформаций суверена (аналог реорганизации ЮЛ) |
 | [sovereign_class_diagram.md](sovereign_class_diagram.md) | Схема классов: жизненный цикл `sovereign` и `sovereign_link` |
 | `scripts/sql/010_org_name_forms.sql` | DDL схемы `org` (текущее состояние в БД) |
@@ -45,8 +46,8 @@
 
 ## 3. Логическая модель (целевая)
 
-Целевая модель рёбер уточнена по [эскизу представления](26-1101_presentation_sketch.md) и обсуждению туннелей.  
-**В БД на момент написания** ещё действует вариант `010`: `language_code` прямо на `name_form_edge`. Миграция к «одно ребро + метки языков» — следующий шаг DDL.
+Целевая модель рёбер и UI: [26-1102_presentation_sketch.md](26-1102_presentation_sketch.md).  
+DDL: `010` (базовые таблицы) → `011` (edge + edge_label) → `012` (seed v0).
 
 ### 3.1. Сущности
 
@@ -55,21 +56,22 @@ language                 — язык UI/ярлыков (de, en, ru, …)
 name_form                — абстрактная основа имени (state, reich, empire, …)
 name_form_label          — name_form × language → строка (Staat, empire, рейх)
 name_form_edge           — смысловое ребро parent → child (один раз)
-name_form_edge_label     — какие языки делают ребро «явным» в UI  [целевое]
+name_form_edge_label     — какие языки делают ребро «явным» в UI
 sovereign                — государство / суверен учёта
 sovereign_name_form      — суверен × name_form × [valid_from, valid_to]
 ```
 
-Позже (не обязательно в v0): `sovereign_name` — полное официальное наименование × язык × даты.
+Позже: `sovereign_name` — полное официальное / картографическое имя × язык × роль × даты.
 
-### 3.2. Текущие таблицы в Postgres (`010`)
+### 3.2. Таблицы в Postgres (`010`+`011`)
 
 | Таблица | Содержание |
 |--------|------------|
 | `org.language` | языки (seed: de, en, ru, fr, ja) |
 | `org.name_form` | вершины (`code`, `assignable`) |
 | `org.name_form_label` | ярлыки вершин |
-| `org.name_form_edge` | рёбра **с** `language_code` на ребре (промежуточная схема) |
+| `org.name_form_edge` | смысловые рёбра **без** `language_code` |
+| `org.name_form_edge_label` | метки языков явного шага UI |
 | `org.sovereign` | суверены |
 | `org.sovereign_name_form` | периоды формулы имени |
 
@@ -82,7 +84,7 @@ sovereign_name_form      — суверен × name_form × [valid_from, valid_t
 
 ### 4.1. Явное ребро и туннель
 
-- Ребро **явное в L**, если у него есть метка языка L (`edge_label` в целевой модели; в схеме `010` — совпадение `language_code`).  
+- Ребро **явное в L**, если есть строка в `name_form_edge_label` для языка L.  
 - Иначе ребро при обходе — **туннель**: путь не обрывается, промежуточный узел в UI может не рисоваться.
 
 ### 4.2. Правила
@@ -104,7 +106,8 @@ sovereign_name_form      — суверен × name_form × [valid_from, valid_t
 
 Смысл: на независимом уровне reich уже empire; UI языка выбирает, какой этаж показать.
 
-Эскизы желаемых полных деревьев: [26-1101_presentation_sketch.md](26-1101_presentation_sketch.md).
+Эскиз UI de/en/ru v0: [26-1102_presentation_sketch.md](26-1102_presentation_sketch.md).  
+Ранний эскиз (архив): [26-1101_presentation_sketch.md](26-1101_presentation_sketch.md).
 
 ---
 
@@ -122,9 +125,9 @@ sovereign_name_form      — суверен × name_form × [valid_from, valid_t
 | Шаг | Статус |
 |-----|--------|
 | Schema `org` + таблицы `010` | сделано |
-| Документы `docs/org` | сделано (этот файл + глоссарий) |
-| Миграция ребра → `edge` + `edge_label` | планируется |
-| Seed v0 (вершины, рёбра, DE/EN, Japan/Germany/…) | планируется |
+| Документы `docs/org` | сделано |
+| Миграция ребра → `edge` + `edge_label` (`011`) | сделано |
+| Seed v0 (`012`, канон 1102) | сделано |
 | VIEW / функция «дерево для языка L» | планируется |
 | Словарь трансформаций суверена (аналог ЮЛ) | зафиксирован в [sovereign_transformation.md](sovereign_transformation.md); DDL событий — позже |
 | Таблицы ВС / коалиций | позже, тот же schema `org` или смежно |
