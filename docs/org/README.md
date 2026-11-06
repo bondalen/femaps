@@ -11,6 +11,7 @@
 | [26-1102_presentation_sketch.md](26-1102_presentation_sketch.md) | Эскиз UI de/en/ru v0: официальные имена, AT/RU, туннели |
 | [sovereign_transformation.md](sovereign_transformation.md) | Закрытый перечень трансформаций суверена (аналог реорганизации ЮЛ) |
 | [sovereign_class_diagram.md](sovereign_class_diagram.md) | Схема классов: жизненный цикл `sovereign` и `sovereign_link` |
+| [26-1106_sovereign_relation_discussion.md](26-1106_sovereign_relation_discussion.md) | Черновик чата: `SovereignRelation` (вертикаль/горизонталь), Membership, оккупация |
 | `scripts/sql/010_org_name_forms.sql` | DDL схемы `org` (текущее состояние в БД) |
 | `docs/chat/plan/26-1029_01_states_orgs.md` | План работ чата |
 | `docs/26-1029_onto_and_db.md` | Предыстория: состав vs управление, KStN, государство |
