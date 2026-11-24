@@ -13,6 +13,7 @@
 | [sovereign_class_diagram.md](sovereign_class_diagram.md) | Схема классов: жизненный цикл `sovereign` и `sovereign_link` |
 | [26-1106_sovereign_relation_discussion.md](26-1106_sovereign_relation_discussion.md) | Черновик: `SovereignRelation` (вертикаль/горизонталь), Membership, оккупация |
 | [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) | Канон итерации 0: `org` + ЖЦ + `Reor*` (от `rgTax`); convert = same id |
+| [26-1124_org_lifecycle_er.md](26-1124_org_lifecycle_er.md) | ER Postgres (черновик): лицо + frm/trm + Reor*; снимок структуры FishEye |
 | `scripts/sql/010_org_name_forms.sql` | DDL схемы `org` (текущее состояние в БД) |
 | `docs/chat/plan/26-1124_01_org_lifecycle.md` | План: жизненный цикл `org` / правопреемство |
 | `docs/chat/plan/26-1029_01_states_orgs.md` | План: суверены и `name_form` (фаза A) |

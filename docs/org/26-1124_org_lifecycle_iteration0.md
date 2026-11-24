@@ -2,6 +2,7 @@
 
 **Статус:** согласованное направление (2026-11-24); DDL ещё не влит.  
 **План чата:** [26-1124_01_org_lifecycle.md](../chat/plan/26-1124_01_org_lifecycle.md)  
+**ER Postgres (черновик):** [26-1124_org_lifecycle_er.md](26-1124_org_lifecycle_er.md)  
 **Источник каркаса:** `FishEye` / `ags.rgTax*` / особенно `rgTaxReor*` (метафора ЮЛ, не норма международного права).  
 **Смежное:** [sovereign_transformation.md](sovereign_transformation.md), [sovereign_class_diagram.md](sovereign_class_diagram.md), эскиз `org_*` (PDF 26-1123), [26-1106_sovereign_relation_discussion.md](26-1106_sovereign_relation_discussion.md).
 
@@ -87,7 +88,7 @@ DDL и seed — по плану чата; class-диаграмму синхро�
 
 | Уже в проекте | Отношение к итерации 0 |
 |---------------|-------------------------|
-| `org.sovereign` / `name_form` / 010–012 | соседний контур формул; не ломать; позже `sovereign` ⊆ `org` по type |
+| `org.sovereign` / `name_form` / 010–012 | `sovereign` — устаревшая, **не трогать**; `name_form` — соседний контур; новый ЖЦ — таблица `org` с нуля; позже стык по type |
 | `sovereign_transformation.md` | канон форм ЮЛ; дополнить правилом convert и отсылкой к DDL |
 | `sovereign_class_diagram.md` сегменты 1–2 | ООП-проекция тех же фактов, что лицо + `Reor*` |
 | сегмент 3–4 / 26-1106 | **после** итерации 0–1; Membership ≠ Reor |

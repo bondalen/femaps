@@ -3,12 +3,13 @@
 **Чат:** 26-1124_01_org_lifecycle  
 **Дата создания:** 2026-11-24  
 **Последнее обновление:** 2026-11-24  
-**Версия плана:** 0.1.0  
-**Статус:** ★ **итерация 0** 🔶 (документы); DDL ☐  
+**Версия плана:** 0.1.1  
+**Статус:** ★ **итерация 0** 🔶 (документы + ER-черновик); DDL ☐  
 
 **Стек:** PostgreSQL 16 / PostGIS — `maps_db`, schema **`org`**, порт **5434** (геометрия не используется).  
 **Источник каркаса:** MS SQL `FishEye` / `FishEye_prod_noM6`, таблицы `ags.rgTax*` / `rgTaxReor*` (доступ: Cursor DBHub).  
 **Канон решений:** [docs/org/26-1124_org_lifecycle_iteration0.md](../../org/26-1124_org_lifecycle_iteration0.md)  
+**ER Postgres (черновик):** [docs/org/26-1124_org_lifecycle_er.md](../../org/26-1124_org_lifecycle_er.md)  
 **Предыстория форм:** [sovereign_transformation.md](../../org/sovereign_transformation.md) · [sovereign_class_diagram.md](../../org/sovereign_class_diagram.md)  
 **Соседний контур имён:** [26-1029_01_states_orgs.md](26-1029_01_states_orgs.md) (фаза A `name_form` — не блокирует и не заменяет этот чат)
 
@@ -62,11 +63,12 @@
 ├─ 1.0. Решения и документы                                     ✅
 │  ├─ 1.0.1  Канон итерации 0 (26-1124_org_lifecycle_iteration0) ✅
 │  ├─ 1.0.2  План чата                                          ✅
-│  ├─ 1.0.3  Извлечение rgTax* / Reor* через DBHub (обзор)      ✅
-│  └─ 1.0.4  Связь с sovereign_* / эскизом org / 26-1106        ✅
+│  ├─ 1.0.3  Извлечение rgTax* / Reor* через DBHub (структура)  ✅
+│  ├─ 1.0.4  Связь с sovereign_* / эскизом org / 26-1106        ✅
+│  └─ 1.0.5  ER-черновик Postgres (26-1124_org_lifecycle_er)    ✅
 │
 ├─ 1.1. Итерация 0 — DDL                                        ☐  ★
-│  ├─ 1.1.1  Именование таблиц/колонок в Postgres               ☐
+│  ├─ 1.1.1  Именование таблиц/колонок в Postgres               🔶
 │  ├─ 1.1.2  Справочники frm_method / trm_method (seed кодов)   ☐
 │  ├─ 1.1.3  Таблица лица org (frm/trm + даты)                   ☐
 │  ├─ 1.1.4  Reor*: Merge, Acqui, Divis, Separ                  ☐  ★
@@ -107,6 +109,7 @@
 | Путь | Роль |
 |------|------|
 | [docs/org/26-1124_org_lifecycle_iteration0.md](../../org/26-1124_org_lifecycle_iteration0.md) | решения итерации 0 |
+| [docs/org/26-1124_org_lifecycle_er.md](../../org/26-1124_org_lifecycle_er.md) | ER Postgres + снимок `rgTax*` / Reor* (черновик) |
 | [docs/org/sovereign_transformation.md](../../org/sovereign_transformation.md) | перечень форм (метафора) |
 | [docs/org/sovereign_class_diagram.md](../../org/sovereign_class_diagram.md) | классы сегментов 1–3 |
 | [docs/org/26-1106_sovereign_relation_discussion.md](../../org/26-1106_sovereign_relation_discussion.md) | черновик Membership/оккупация (после 0) |
@@ -117,7 +120,7 @@
 
 ## 4. Следующий конкретный шаг
 
-★ **1.1.1–1.1.4:** зафиксировать имена таблиц Postgres и набросать DDL лица + Acqui/Merge/Divis/Separ (+ справочники), затем прецедент Австрия (1.2.1).
+★ Согласовать имена/состав ER ([26-1124_org_lifecycle_er.md](../../org/26-1124_org_lifecycle_er.md) §6), затем **1.1.2–1.1.4** — DDL лица + Acqui/Merge/Divis/Separ (+ справочники), прецедент Австрия (1.2.1). `org.sovereign` не трогать.
 
 ---
 
@@ -126,3 +129,4 @@
 | Дата | Событие |
 |------|---------|
 | 2026-11-24 | Согласованы итерации; Reor* в итерации 0; convert = same id; `org` шире sovereign. План 0.1.0 + канон iteration0. DBHub в проекте для сверки FishEye. |
+| 2026-11-24 | Снята структура `rgTax*`/`Reor*` из FishEye; ER-черновик Postgres; `sovereign` оставлен устаревшим. План 0.1.1. |
