@@ -2,6 +2,7 @@
 
 **Чат / дата:** 2026-11-06  
 **Статус:** обсуждение **не завершено**; сегмент в [sovereign_class_diagram.md](sovereign_class_diagram.md) **ещё не зафиксирован**.  
+**Очерёдность (2026-11-24):** сначала итерация 0 ЖЦ+`Reor*` — [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) / план [26-1124_01…](../chat/plan/26-1124_01_org_lifecycle.md); Membership / оккупация — **после** правопреемства (не смешивать с `Reor*`).  
 **Контекст:** продолжение схемы классов после сегментов 1–3 (создание, ликвидация, оккупация).  
 **Смысл трансформаций:** [sovereign_transformation.md](sovereign_transformation.md).
 

@@ -11,9 +11,11 @@
 | [26-1102_presentation_sketch.md](26-1102_presentation_sketch.md) | Эскиз UI de/en/ru v0: официальные имена, AT/RU, туннели |
 | [sovereign_transformation.md](sovereign_transformation.md) | Закрытый перечень трансформаций суверена (аналог реорганизации ЮЛ) |
 | [sovereign_class_diagram.md](sovereign_class_diagram.md) | Схема классов: жизненный цикл `sovereign` и `sovereign_link` |
-| [26-1106_sovereign_relation_discussion.md](26-1106_sovereign_relation_discussion.md) | Черновик чата: `SovereignRelation` (вертикаль/горизонталь), Membership, оккупация |
+| [26-1106_sovereign_relation_discussion.md](26-1106_sovereign_relation_discussion.md) | Черновик: `SovereignRelation` (вертикаль/горизонталь), Membership, оккупация |
+| [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) | Канон итерации 0: `org` + ЖЦ + `Reor*` (от `rgTax`); convert = same id |
 | `scripts/sql/010_org_name_forms.sql` | DDL схемы `org` (текущее состояние в БД) |
-| `docs/chat/plan/26-1029_01_states_orgs.md` | План работ чата |
+| `docs/chat/plan/26-1124_01_org_lifecycle.md` | План: жизненный цикл `org` / правопреемство |
+| `docs/chat/plan/26-1029_01_states_orgs.md` | План: суверены и `name_form` (фаза A) |
 | `docs/26-1029_onto_and_db.md` | Предыстория: состав vs управление, KStN, государство |
 
 **БД:** PostgreSQL / PostGIS `maps_db` (`localhost:5434`), schema **`org`**.  
@@ -130,8 +132,9 @@ sovereign_name_form      — суверен × name_form × [valid_from, valid_t
 | Миграция ребра → `edge` + `edge_label` (`011`) | сделано |
 | Seed v0 (`012`, канон 1102) | сделано |
 | VIEW / функция «дерево для языка L» | планируется |
-| Словарь трансформаций суверена (аналог ЮЛ) | зафиксирован в [sovereign_transformation.md](sovereign_transformation.md); DDL событий — позже |
-| Таблицы ВС / коалиций | позже, тот же schema `org` или смежно |
+| Словарь трансформаций (аналог ЮЛ) | зафиксирован в [sovereign_transformation.md](sovereign_transformation.md) |
+| Итерация 0: DDL лица + `Reor*` | канон [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md); план [26-1124_01…](../chat/plan/26-1124_01_org_lifecycle.md) |
+| Таблицы ВС / коалиций | позже, тот же schema `org` (`org_type`); ЖЦ общий |
 
 ---
 

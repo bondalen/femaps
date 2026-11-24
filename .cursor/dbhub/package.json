@@ -1,0 +1,14 @@
+{
+  "name": "femaps-dbhub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local MCP DBHub install for femaps (not a workspace npm project)",
+  "license": "ISC",
+  "dependencies": {
+    "@bytebase/dbhub": "^0.11.10"
+  },
+  "overrides": {
+    "mariadb": "3.4.0",
+    "ssh-config": "4.1.6"
+  }
+}

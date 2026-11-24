@@ -50,3 +50,5 @@ Thumbs.db
 # --- Cursor local ---
 .cursor/mcp.json
 .cursor/mcp.json.bak*
+.cursor/dbhub/node_modules/
+.cursor/dbhub/package-lock.json

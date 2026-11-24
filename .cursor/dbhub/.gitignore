@@ -1,0 +1,3 @@
+# DBHub локальная установка
+node_modules/
+package-lock.json

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "dbhub": {
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/.cursor/dbhub/node_modules/@bytebase/dbhub/dist/index.js"
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        "DSN": "sqlserver://sa:CHANGE_ME@10.7.0.3:1433/FishEye_prod_noM6?sslmode=disable&encrypt=false&trustServerCertificate=true",
+        "TRANSPORT": "stdio"
+      }
+    }
+  }
+}

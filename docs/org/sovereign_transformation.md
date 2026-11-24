@@ -5,7 +5,8 @@
 
 **Статус:** рабочая модель для раздела `org`. Юридический перечень ЮЛ — **метафора правопреемства и жизненного цикла**, не претензия на налоговое или международно-правовое равенство государства и ООО.
 
-См. также: [README.md](README.md), [glossary.md](glossary.md), [sovereign_class_diagram.md](sovereign_class_diagram.md) (схема классов).
+См. также: [README.md](README.md), [glossary.md](glossary.md), [sovereign_class_diagram.md](sovereign_class_diagram.md) (схема классов),  
+[26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) (итерация 0: DDL от `rgTax`/`Reor*`, сущность `org`, **convert = same id**).
 
 ---
 
@@ -121,7 +122,8 @@
 
 ### 2.5. Что наращивать дальше
 
-`source` Австрии 111; ликвидация `germany` / рождение ОЗ; ликвидация ОЗ при merge; `founded`; имена; `SovereignLink`.
+Реляционный каркас итерации 0 (`org` + справочники + `Reor*`) — план [26-1124_01_org_lifecycle](../chat/plan/26-1124_01_org_lifecycle.md).  
+Затем: `source` Австрии 111; ликвидация `germany` / рождение ОЗ; ликвидация ОЗ при merge; `founded`; имена; длящийся `SovereignLink` / Membership (не путать с `Reor*`).
 
 ---
 

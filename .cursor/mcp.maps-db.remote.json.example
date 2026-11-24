@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "dbhub": {
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/.cursor/dbhub/node_modules/@bytebase/dbhub/dist/index.js"
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        "DSN": "postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db?sslmode=disable",
+        "TRANSPORT": "stdio"
+      }
+    }
+  }
+}
