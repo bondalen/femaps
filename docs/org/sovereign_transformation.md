@@ -122,8 +122,8 @@
 
 ### 2.5. Что наращивать дальше
 
-Реляционный каркас итерации 0 (`org` + справочники + `Reor*`) — план [26-1124_01_org_lifecycle](../chat/plan/26-1124_01_org_lifecycle.md).  
-Затем: `source` Австрии 111; ликвидация `germany` / рождение ОЗ; ликвидация ОЗ при merge; `founded`; имена; длящийся `SovereignLink` / Membership (не путать с `Reor*`).
+Реляционный каркас итерации 0 (`org` + справочники + `Reor*`) — **влит** ([`013_org_lifecycle.sql`](../../scripts/sql/013_org_lifecycle.sql); план [26-1124_01_org_lifecycle](../chat/plan/26-1124_01_org_lifecycle.md)): Absorb AT→DE; Convert-id `japan` (`frm` 660-02-11 BC, учётный якорь).  
+Далее: sync class-диаграммы; прочие прецеденты; `source` Австрии 111; ликвидация `germany` / рождение ОЗ; merge ФРГ; имена; длящийся `SovereignLink` / Membership (не путать с `Reor*`).
 
 ---
 

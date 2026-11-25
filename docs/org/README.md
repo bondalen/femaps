@@ -12,9 +12,10 @@
 | [sovereign_transformation.md](sovereign_transformation.md) | Закрытый перечень трансформаций суверена (аналог реорганизации ЮЛ) |
 | [sovereign_class_diagram.md](sovereign_class_diagram.md) | Схема классов: жизненный цикл `sovereign` и `sovereign_link` |
 | [26-1106_sovereign_relation_discussion.md](26-1106_sovereign_relation_discussion.md) | Черновик: `SovereignRelation` (вертикаль/горизонталь), Membership, оккупация |
-| [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) | Канон итерации 0: `org` + ЖЦ + `Reor*` (от `rgTax`); convert = same id |
-| [26-1124_org_lifecycle_er.md](26-1124_org_lifecycle_er.md) | ER Postgres (черновик): лицо + frm/trm + Reor*; снимок структуры FishEye |
-| `scripts/sql/010_org_name_forms.sql` | DDL схемы `org` (текущее состояние в БД) |
+| [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) | Канон итерации 0 (**закрыта**): `org` + ЖЦ + `Reor*`; convert = same id |
+| [26-1124_org_lifecycle_er.md](26-1124_org_lifecycle_er.md) | ER Postgres: лицо + frm/trm + Reor*; прецеденты AT→DE, Japan |
+| `scripts/sql/010_org_name_forms.sql` | DDL `name_form` / legacy sovereign |
+| `scripts/sql/013_org_lifecycle.sql` | DDL ЖЦ `org` + Reor* + seed AT/DE/JP |
 | `docs/chat/plan/26-1124_01_org_lifecycle.md` | План: жизненный цикл `org` / правопреемство |
 | `docs/chat/plan/26-1029_01_states_orgs.md` | План: суверены и `name_form` (фаза A) |
 | `docs/26-1029_onto_and_db.md` | Предыстория: состав vs управление, KStN, государство |
@@ -134,7 +135,7 @@ sovereign_name_form      — суверен × name_form × [valid_from, valid_t
 | Seed v0 (`012`, канон 1102) | сделано |
 | VIEW / функция «дерево для языка L» | планируется |
 | Словарь трансформаций (аналог ЮЛ) | зафиксирован в [sovereign_transformation.md](sovereign_transformation.md) |
-| Итерация 0: DDL лица + `Reor*` | канон [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md); план [26-1124_01…](../chat/plan/26-1124_01_org_lifecycle.md) |
+| Итерация 0: DDL лица + `Reor*` | ✅ applied `maps_db` 2026-11-25; seed AT→DE + `japan`; [канон](26-1124_org_lifecycle_iteration0.md) · [ER](26-1124_org_lifecycle_er.md) · [`013`](../../scripts/sql/013_org_lifecycle.sql) |
 | Таблицы ВС / коалиций | позже, тот же schema `org` (`org_type`); ЖЦ общий |
 
 ---
