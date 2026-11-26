@@ -2,9 +2,9 @@
 
 **Чат:** 26-1124_01_org_lifecycle  
 **Дата создания:** 2026-11-24  
-**Последнее обновление:** 2026-11-25  
-**Версия плана:** 0.4.2  
-**Статус:** 🔶 in-progress — ★ **2.4** class sync (после ✅ 2.3 apply `014`)  
+**Последнее обновление:** 2026-11-26  
+**Версия плана:** 0.4.4  
+**Статус:** 🔶 in-progress — ★ **1.8 имена** ‖ связи v0 ✅ (`015`); 2.4 ⏸  
 
 **Стек:** PostgreSQL 16 / PostGIS — `maps_db`, schema **`org`**, порт **5434** (геометрия не используется).  
 **Источник каркаса:** MS SQL `FishEye` / `FishEye_prod_noM6`, `ags.rgTax*` / `rgTaxReor*` (Cursor DBHub).  
@@ -26,7 +26,8 @@
 - таблицы **правопреемства** (`org_reor_*`) как основа основ;  
 - **преобразование не меняет id**;  
 - **двусторонняя** целостность method↔Reor (вариант A);  
-- расширение итерациями: ЖЦ+Reor → прецеденты → длящиеся связи → оккупация.
+- расширение: ЖЦ+Reor → прецеденты **параллельно с** именами и длящимися связями → оккупация;  
+  class-диаграмму синхронизировать **после** появления DDL имён/связей (не сразу после Reor).
 
 ### Критерий закрытия итерации 0
 
@@ -90,7 +91,7 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 │  ├─ 1.5 Convert = same id (без Trans)                        ✅
 │  ├─ 1.6 Deferred triggers assert_org_reor_consistency        ✅
 │  ├─ 1.7 Seed AT→DE в 013 (1938-03-13, reor_acqui)            ✅
-│  ├─ 1.8 Имена под id (rgTaxName*)                            ⏸ → 0.5
+│  ├─ 1.8 Имена под id (rgTaxName* / стык name_form)           ☐ ★ → итер. 0.5
 │  ├─ 1.9 Apply 013 на maps_db + VERIFY                        ✅ 2026-11-25
 │  │  ├─ 1.9.1 TCP/auth maps_db @ 10.7.0.3:5434                ✅
 │  │  ├─ 1.9.2 node/pg apply 013_org_lifecycle.sql             ✅
@@ -98,37 +99,42 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 │  │  └─ 1.9.4 Негатив: сирота method без ребра → ошибка       ✅
 │  └─ 1.10 Документы после apply (план/ER/канон)               ✅ 2026-11-25
 │
-├─ 2. Прецеденты на каркасе 0                                  🔶 next=2.4
+├─ 2. Прецеденты на каркасе 0                                  🔶 ‖ копят
 │  ├─ 2.1 Absorb AT→DE                                         ✅ 2026-11-25
 │  ├─ 2.2 Convert: Япония — ЖЦ id                              ✅ 2026-11-25
 │  │      · org.org japan frm=1.0, frm_date=0660-02-11 BC
 │  ├─ 2.3 Линия kiev→vladimir→moscow                           ✅ 2026-11-26
 │  │      · apply 014 OK; separ×2; acqui kiev/vladimir→moscow
-│  │      · assert PASS; календарь A; kiev close упрощён
-│  └─ 2.4 Синхронизация sovereign_class_diagram ↔ DDL          ☐ ★
+│  ├─ 2.3+ Далее прецеденты (по мере имён/связей)              ☐ ‖
+│  └─ 2.4 Sync sovereign_class_diagram ↔ DDL                   ⏸ рано
+│        · после DDL имён и org_rel / Membership
 │
-├─ 3. Итерация 2 — длящиеся связи                              ⏸
+├─ 3. Длящиеся связи между org                                 🔶 v0 ✅
 │  │   Membership / org_rel (часть–целое); ≠ Reor
-│  ├─ 3.1 ER/DDL part_of (Пруссия ⊂ Германия)                  ☐
-│  └─ 3.2 Анти-смешение absorb ≠ membership                    ☐
+│  ├─ 3.0 ER org_rel (26-1126_org_rel)                         ✅ 2026-11-26
+│  ├─ 3.1 DDL 015 + apply; moscow ⊂ vladimir                   ✅ 2026-11-26
+│  │      · valid_from/to NULL → effective из frm/trm
+│  │      · VIEW org_rel_effective
+│  ├─ 3.2 Анти-смешение absorb ≠ membership (в ER)             ✅
+│  └─ 3.3+ Далее: Пруссия⊂DE, Орда/ВКЛ, жёсткие CHECK          ☐ ‖
 │
 └─ 4. Оккупация / вертикаль контроля                           ⏸
-   └─ 4.1 После 2–3; см. 26-1106                               ☐
+   └─ 4.1 После связей; см. 26-1106                            ☐
 ```
 
-**Критическая цепочка:**
+**Ось дальше (не class sync):**
 
 ```text
-0 ✅  →  1 ✅  →  2.1 ✅  →  2.2 ✅  →  2.3 ✅  →  2.4 class sync  →  3…
+ЖЦ Reor ✅  →  связи v0 ✅  →  ★ 1.8 имена  ‖  3.3+ / 2.3+  →  2.4 sync  →  4…
 ```
 
-**Сейчас ★:** **`2.4`** (sync class-диаграммы с DDL).
+**Сейчас ★:** **`1.8` имена под `org.id`**.
 
 ---
 
 ## 3. Принципы (кратко)
 
-1. **Правопреемство ≠ состав.** `org_reor_acqui` — прекращение-присоединение; `part_of` — пока оба живы.  
+1. **Правопреемство ≠ состав.** `org_reor_*` — смена ЖЦ; `org_rel` `part_of` — пока оба в составе (effective из ЖЦ при NULL дат).  
 2. **Основа — Reor* + method на лице**; kind без ребра для absorb/merge/… недостаточен.  
 3. **Двусторонняя целостность** — вариант A (ER §4.1).  
 4. **`org` шире суверена**; `org_type` — позже.  
@@ -151,13 +157,17 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | [26-1125_google_org_chat.md](../../26-1125_google_org_chat.md) | обсуждение непрерывности JP/Русь |
 | [sovereign_transformation.md](../../org/sovereign_transformation.md) | перечень форм |
 | [sovereign_class_diagram.md](../../org/sovereign_class_diagram.md) | классы сегментов 1–3 |
-| [26-1106_sovereign_relation_discussion.md](../../org/26-1106_sovereign_relation_discussion.md) | Membership/оккупация (после 0) |
+| [26-1106_sovereign_relation_discussion.md](../../org/26-1106_sovereign_relation_discussion.md) | черновик Membership/оккупация |
+| [26-1126_org_rel.md](../../org/26-1126_org_rel.md) | ER связей v0 |
+| [015_org_rel.sql](../../../scripts/sql/015_org_rel.sql) | DDL `org_rel` + VIEW + seed |
 
 ---
 
 ## 5. Следующий конкретный шаг
 
-★ **2.4** — синхронизация `sovereign_class_diagram` с реляцией (`013`/`014`, прецеденты JP + Киевская линия).
+★ **1.8** — ER/DDL имён под `org.id` (полное/краткое × период; стык с `name_form`).  
+‖ **3.3+** — следующие `part_of` (Пруссия ⊂ DE и др.).  
+**2.4** class sync — после имён.
 
 ---
 
@@ -172,4 +182,7 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | 2026-11-25 | §2 **Дерево работ** как в femsq; план 0.3.2. |
 | 2026-11-25 | DBHub → maps_db; seed `japan` (660-02-11 BC); горизонт/Separ; итерация 0 закрыта; план 0.4.0. |
 | 2026-11-26 | Календарь A; SQL `014` kiev/vladimir/moscow (kiev close упрощён); план 0.4.1. |
-| 2026-11-26 | Apply `014` OK; VERIFY separ/acqui/assert; план 0.4.2; ★ → 2.4. |
+| 2026-11-26 | Apply `014` OK; VERIFY separ/acqui/assert; план 0.4.2. |
+| 2026-11-26 | 2.4 отложен: сначала имена ‖ связи + прецеденты; план 0.4.3. |
+| 2026-11-26 | `org_rel` v0: ER 26-1126 + apply `015`; moscow⊂vladimir effective OK; план 0.4.4; ★ → 1.8. |
+| 2026-11-26 | Seed `ussr` + `moscow`⊂`ussr` (`016`); даты связи NULL → eff 1922–1991. |
