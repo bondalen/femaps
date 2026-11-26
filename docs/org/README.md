@@ -16,6 +16,8 @@
 | [26-1124_org_lifecycle_er.md](26-1124_org_lifecycle_er.md) | ER Postgres: лицо + frm/trm + Reor*; прецеденты AT→DE, Japan |
 | `scripts/sql/010_org_name_forms.sql` | DDL `name_form` / legacy sovereign |
 | `scripts/sql/013_org_lifecycle.sql` | DDL ЖЦ `org` + Reor* + seed AT/DE/JP |
+| `scripts/sql/014_org_precedents_kievan_line.sql` | Seed kiev→vladimir→moscow (Separ/Absorb); календарь A |
+| [26-1125_google_org_chat.md](../26-1125_google_org_chat.md) | Транскрипт: непрерывность JP / Киев–Владимир–Москва |
 | `docs/chat/plan/26-1124_01_org_lifecycle.md` | План: жизненный цикл `org` / правопреемство |
 | `docs/chat/plan/26-1029_01_states_orgs.md` | План: суверены и `name_form` (фаза A) |
 | `docs/26-1029_onto_and_db.md` | Предыстория: состав vs управление, KStN, государство |

@@ -3,8 +3,8 @@
 **Чат:** 26-1124_01_org_lifecycle  
 **Дата создания:** 2026-11-24  
 **Последнее обновление:** 2026-11-25  
-**Версия плана:** 0.4.0  
-**Статус:** 🔶 in-progress — next §2.3 / §2.4 (итерация 0 ✅; JP id ✅)  
+**Версия плана:** 0.4.2  
+**Статус:** 🔶 in-progress — ★ **2.4** class sync (после ✅ 2.3 apply `014`)  
 
 **Стек:** PostgreSQL 16 / PostGIS — `maps_db`, schema **`org`**, порт **5434** (геометрия не используется).  
 **Источник каркаса:** MS SQL `FishEye` / `FishEye_prod_noM6`, `ags.rgTax*` / `rgTaxReor*` (Cursor DBHub).  
@@ -98,16 +98,14 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 │  │  └─ 1.9.4 Негатив: сирота method без ребра → ошибка       ✅
 │  └─ 1.10 Документы после apply (план/ER/канон)               ✅ 2026-11-25
 │
-├─ 2. Прецеденты на каркасе 0                                  🔶 next=2.3|2.4
+├─ 2. Прецеденты на каркасе 0                                  🔶 next=2.4
 │  ├─ 2.1 Absorb AT→DE                                         ✅ 2026-11-25
 │  ├─ 2.2 Convert: Япония — ЖЦ id                              ✅ 2026-11-25
 │  │      · org.org japan frm=1.0, frm_date=0660-02-11 BC
-│  │      · легендарный учётный якорь (не научная дата)
-│  │      · имена / name_form не трогали (уже в sovereign_*)
-│  │      · горизонт: ствол 1.0; Separ — точечно (док)
-│  ├─ 2.3 Прочие (Россия/удел, Чехословакия, merge ФРГ…)       ☐ ★
-│  │      · обсуждение: удел = Separ; регресс предков — горизонт
-│  └─ 2.4 Синхронизация sovereign_class_diagram ↔ DDL          ☐
+│  ├─ 2.3 Линия kiev→vladimir→moscow                           ✅ 2026-11-26
+│  │      · apply 014 OK; separ×2; acqui kiev/vladimir→moscow
+│  │      · assert PASS; календарь A; kiev close упрощён
+│  └─ 2.4 Синхронизация sovereign_class_diagram ↔ DDL          ☐ ★
 │
 ├─ 3. Итерация 2 — длящиеся связи                              ⏸
 │  │   Membership / org_rel (часть–целое); ≠ Reor
@@ -121,10 +119,10 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 **Критическая цепочка:**
 
 ```text
-0 ✅  →  1 ✅  →  2.1 ✅  →  2.2 ✅ (JP id)  →  2.3|2.4  →  3…
+0 ✅  →  1 ✅  →  2.1 ✅  →  2.2 ✅  →  2.3 ✅  →  2.4 class sync  →  3…
 ```
 
-**Сейчас ★:** **`2.3`** (следующий прецедент / Россия) или **`2.4`** (class sync).
+**Сейчас ★:** **`2.4`** (sync class-диаграммы с DDL).
 
 ---
 
@@ -137,7 +135,8 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 5. **convert = same id.**  
 6. **`name_form`** — соседний контур, не кодирует absorb.  
 7. **Горизонт:** `frm=1.0` обрезает регресс предков; Separ — когда нужны два живых id.  
-8. Правки порядка — сначала дерево §2.
+8. **Календарь A:** `frm_date`/`trm_date` только григориан (пролептический); исходник в `note`.  
+9. Правки порядка — сначала дерево §2.
 
 ---
 
@@ -148,6 +147,8 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | [26-1124_org_lifecycle_iteration0.md](../../org/26-1124_org_lifecycle_iteration0.md) | канон итерации 0 (закрыта) |
 | [26-1124_org_lifecycle_er.md](../../org/26-1124_org_lifecycle_er.md) | ER + матрица + прецеденты |
 | [013_org_lifecycle.sql](../../../scripts/sql/013_org_lifecycle.sql) | DDL + triggers + seed AT/DE/JP |
+| [014_org_precedents_kievan_line.sql](../../../scripts/sql/014_org_precedents_kievan_line.sql) | seed kiev/vladimir/moscow + Reor |
+| [26-1125_google_org_chat.md](../../26-1125_google_org_chat.md) | обсуждение непрерывности JP/Русь |
 | [sovereign_transformation.md](../../org/sovereign_transformation.md) | перечень форм |
 | [sovereign_class_diagram.md](../../org/sovereign_class_diagram.md) | классы сегментов 1–3 |
 | [26-1106_sovereign_relation_discussion.md](../../org/26-1106_sovereign_relation_discussion.md) | Membership/оккупация (после 0) |
@@ -156,7 +157,7 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 
 ## 5. Следующий конкретный шаг
 
-★ **2.3** — следующий прецедент на данных (кандидат: Россия / удел–Separ с горизонтом; или второй Absorb; или merge) **или** ★ **2.4** — sync class-диаграммы с DDL.
+★ **2.4** — синхронизация `sovereign_class_diagram` с реляцией (`013`/`014`, прецеденты JP + Киевская линия).
 
 ---
 
@@ -170,3 +171,5 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | 2026-11-25 | Postgres @ 10.7.0.3:5434 доступен; apply `013` OK; VERIFY AT→DE. |
 | 2026-11-25 | §2 **Дерево работ** как в femsq; план 0.3.2. |
 | 2026-11-25 | DBHub → maps_db; seed `japan` (660-02-11 BC); горизонт/Separ; итерация 0 закрыта; план 0.4.0. |
+| 2026-11-26 | Календарь A; SQL `014` kiev/vladimir/moscow (kiev close упрощён); план 0.4.1. |
+| 2026-11-26 | Apply `014` OK; VERIFY separ/acqui/assert; план 0.4.2; ★ → 2.4. |
