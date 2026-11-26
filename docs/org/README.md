@@ -17,9 +17,11 @@
 | `scripts/sql/010_org_name_forms.sql` | DDL `name_form` / legacy sovereign |
 | `scripts/sql/013_org_lifecycle.sql` | DDL ЖЦ `org` + Reor* + seed AT/DE/JP |
 | `scripts/sql/014_org_precedents_kievan_line.sql` | Seed kiev→vladimir→moscow (Separ/Absorb); календарь A |
+| `scripts/sql/017_org_brandenburg_line.sql` | Seed Восточная марка / Бранденбург / герцогство Пруссия + rel + DivisAcqu→ussr |
 | [26-1126_org_rel.md](26-1126_org_rel.md) | ER длящихся связей `org_rel` / `part_of` v0 |
 | `scripts/sql/015_org_rel.sql` | DDL `org_rel` + VIEW effective + seed moscow⊂vladimir |
 | [26-1125_google_org_chat.md](../26-1125_google_org_chat.md) | Транскрипт: непрерывность JP / Киев–Владимир–Москва |
+| [26-1126_google_org_chat.md](../26-1126_google_org_chat.md) | Транскрипт: аппаратный легитимизм Бранденбург–Пруссия |
 | `docs/chat/plan/26-1124_01_org_lifecycle.md` | План: жизненный цикл `org` / правопреемство |
 | `docs/chat/plan/26-1029_01_states_orgs.md` | План: суверены и `name_form` (фаза A) |
 | `docs/26-1029_onto_and_db.md` | Предыстория: состав vs управление, KStN, государство |

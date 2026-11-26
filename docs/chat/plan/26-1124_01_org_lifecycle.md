@@ -3,8 +3,8 @@
 **Чат:** 26-1124_01_org_lifecycle  
 **Дата создания:** 2026-11-24  
 **Последнее обновление:** 2026-11-26  
-**Версия плана:** 0.4.4  
-**Статус:** 🔶 in-progress — ★ **1.8 имена** ‖ связи v0 ✅ (`015`); 2.4 ⏸  
+**Версия плана:** 0.4.5  
+**Статус:** 🔶 in-progress — ★ **1.8 имена** ‖ связи v0 ✅; прецедент Бранденбург ✅ (`017`); 2.4 ⏸  
 
 **Стек:** PostgreSQL 16 / PostGIS — `maps_db`, schema **`org`**, порт **5434** (геометрия не используется).  
 **Источник каркаса:** MS SQL `FishEye` / `FishEye_prod_noM6`, `ags.rgTax*` / `rgTaxReor*` (Cursor DBHub).  
@@ -105,6 +105,10 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 │  │      · org.org japan frm=1.0, frm_date=0660-02-11 BC
 │  ├─ 2.3 Линия kiev→vladimir→moscow                           ✅ 2026-11-26
 │  │      · apply 014 OK; separ×2; acqui kiev/vladimir→moscow
+│  ├─ 2.3b Бранденбургская линия (017)                         ✅ 2026-11-26
+│  │      · saxon_east(929) Separ→brandenburg; Acqui Лужицы 1816
+│  │      · prussia_duchy part_of brandenburg с 1701-01-18
+│  │      · DivisAcqu север ВП → ussr 1945-08-02 (Польша позже)
 │  ├─ 2.3+ Далее прецеденты (по мере имён/связей)              ☐ ‖
 │  └─ 2.4 Sync sovereign_class_diagram ↔ DDL                   ⏸ рано
 │        · после DDL имён и org_rel / Membership
@@ -116,7 +120,8 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 │  │      · valid_from/to NULL → effective из frm/trm
 │  │      · VIEW org_rel_effective
 │  ├─ 3.2 Анти-смешение absorb ≠ membership (в ER)             ✅
-│  └─ 3.3+ Далее: Пруссия⊂DE, Орда/ВКЛ, жёсткие CHECK          ☐ ‖
+│  ├─ 3.3 prussia_duchy ⊂ brandenburg (в 017)                  ✅ 2026-11-26
+│  └─ 3.3+ Далее: brandenburg⊂DE, Орда/ВКЛ, жёсткие CHECK      ☐ ‖
 │
 └─ 4. Оккупация / вертикаль контроля                           ⏸
    └─ 4.1 После связей; см. 26-1106                            ☐
@@ -154,7 +159,9 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | [26-1124_org_lifecycle_er.md](../../org/26-1124_org_lifecycle_er.md) | ER + матрица + прецеденты |
 | [013_org_lifecycle.sql](../../../scripts/sql/013_org_lifecycle.sql) | DDL + triggers + seed AT/DE/JP |
 | [014_org_precedents_kievan_line.sql](../../../scripts/sql/014_org_precedents_kievan_line.sql) | seed kiev/vladimir/moscow + Reor |
+| [017_org_brandenburg_line.sql](../../../scripts/sql/017_org_brandenburg_line.sql) | seed saxon_east / brandenburg / prussia_duchy + rel + DivisAcqu→ussr |
 | [26-1125_google_org_chat.md](../../26-1125_google_org_chat.md) | обсуждение непрерывности JP/Русь |
+| [26-1126_google_org_chat.md](../../26-1126_google_org_chat.md) | аппаратный легитимизм: Бранденбург / Кенигсберг / Восточная марка |
 | [sovereign_transformation.md](../../org/sovereign_transformation.md) | перечень форм |
 | [sovereign_class_diagram.md](../../org/sovereign_class_diagram.md) | классы сегментов 1–3 |
 | [26-1106_sovereign_relation_discussion.md](../../org/26-1106_sovereign_relation_discussion.md) | черновик Membership/оккупация |
@@ -166,7 +173,7 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 ## 5. Следующий конкретный шаг
 
 ★ **1.8** — ER/DDL имён под `org.id` (полное/краткое × период; стык с `name_form`).  
-‖ **3.3+** — следующие `part_of` (Пруссия ⊂ DE и др.).  
+‖ **3.3+** — `brandenburg` ⊂ `germany`; польская доля DivisAcqu; Орда/ВКЛ.  
 **2.4** class sync — после имён.
 
 ---
@@ -186,3 +193,4 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | 2026-11-26 | 2.4 отложен: сначала имена ‖ связи + прецеденты; план 0.4.3. |
 | 2026-11-26 | `org_rel` v0: ER 26-1126 + apply `015`; moscow⊂vladimir effective OK; план 0.4.4; ★ → 1.8. |
 | 2026-11-26 | Seed `ussr` + `moscow`⊂`ussr` (`016`); даты связи NULL → eff 1922–1991. |
+| 2026-11-26 | Apply `017`: saxon_east/brandenburg/prussia_duchy; part_of 1701; DivisAcqu→ussr; план 0.4.5. |

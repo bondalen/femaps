@@ -1,6 +1,6 @@
 # ER: жизненный цикл `org` и правопреемство (итерация 0)
 
-**Статус:** схема + DDL applied на `maps_db@10.7.0.3:5434`; seed AT→DE + `japan`; линия Киев–Владимир–Москва — **`014` applied 2026-11-26** (VERIFY OK).  
+**Статус:** схема + DDL applied на `maps_db@10.7.0.3:5434`; seed AT→DE + `japan`; Киев–Владимир–Москва (`014`); Бранденбургская линия — **`017` applied 2026-11-26** (VERIFY OK).  
 **План чата:** [26-1124_01_org_lifecycle.md](../chat/plan/26-1124_01_org_lifecycle.md)  
 **Канон решений:** [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md)  
 **Источник каркаса:** MS SQL `FishEye_prod_noM6` / `ags.rgTax*` / `ags.rgTaxReor*` (снято 2026-11-24).  
@@ -286,6 +286,20 @@ Seed AT/DE/JP — в [`013_org_lifecycle.sql`](../../scripts/sql/013_org_lifecyc
 Закрытие `kiev`: исторически divis+acqu (поветы → КН и ИзГ); на этапе 0 сведено к **одному Absorb→`moscow`** с пометкой в `note` (cutoff, без ЖЦ принимающих).  
 `part_of` / Орда / Литва / Польша — не в этом seed. SQL: [`014_org_precedents_kievan_line.sql`](../../scripts/sql/014_org_precedents_kievan_line.sql).
 
+### 5.4. Бранденбургская линия (`017`)
+
+Источник: [26-1126_google_org_chat.md](../26-1126_google_org_chat.md).
+
+| code | frm | frm_date | trm | trm_date | Reor / rel |
+|------|-----|----------|-----|----------|------------|
+| `saxon_east` | `1.0` | `0929-07-01` | `2.5.0` | `1816-04-30` | Acqui → `brandenburg` |
+| `brandenburg` | `2.4` | `0965-05-20` | `0.0.0` | `1947-02-25` | Separ из `saxon_east` |
+| `prussia_duchy` | `1.0` | `1226-03-26` | `2.6.1` | `1945-08-02` | DivisAcqu → mid → `ussr`; `part_of` ⊂ `brandenburg` с 1701-01-18 |
+| `east_prussia_ussr` | `2.6` | `1945-08-02` | `2.6.2` | `1945-08-02` | промежуточный DivisAcqu |
+
+`frm` Восточной марки = середина ~929 (Legatio Зигфрида, тот же аппарат). Кенигсберг после 1701 — провинция (rel), не Absorb. Польская доля раздела — позже.  
+SQL: [`017_org_brandenburg_line.sql`](../../scripts/sql/017_org_brandenburg_line.sql).
+
 ---
 
 ## 6. Решения по открытым пунктам (2026-11-25…26)
@@ -303,3 +317,5 @@ Seed AT/DE/JP — в [`013_org_lifecycle.sql`](../../scripts/sql/013_org_lifecyc
 | Целостность method↔Reor | вариант **A** (§4.1); B отклонён |
 | Apply `013` | ✅ `maps_db` 2026-11-25 |
 | Apply `014` | ✅ `maps_db` 2026-11-26 |
+| Бранденбург / Кенигсберг | `017`: Separ+Acqui+DivisAcqu→ussr; `part_of` с 1701-01-18 |
+| Apply `017` | ✅ `maps_db` 2026-11-26 |
