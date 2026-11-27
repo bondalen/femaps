@@ -163,10 +163,12 @@ Kind v0: `full`, `short`. Расширения (`honor`, `map`, …) — чер�
 
 ## 7. Связь с существующим `name_form`
 
-- Смысловой DAG, `name_form_edge_label`, туннели — **без переделки** в 1.8.  
-- Новые вершины (division, panzer, arrondissement, school, …) — **отдельным seed** по мере прецедентов; не смешивать с reich/empire без нужды.  
-- Перенос периодов DE/AT/JP с `sovereign_name_form` → `org_name_form` (+ `org_name` из `note`); legacy не DELETE.  
-- VIEW «дерево L» (план 26-1029) — после DDL имён, не блокирует.
+- Ветка empire/reich v0 (**1102**) сохраняется.  
+- Расширение самоназваний (княжество → курфюршество; герцогство → великое; марка; Freistaat):  
+  **[26-1127_name_form_title_tree.md](26-1127_name_form_title_tree.md)** — сначала seed дерева, затем периоды `brandenburg`.  
+- Контур = **титульные формулы**, не форма правления / не Reor.  
+- Военные/муниципальные вершины (division, arrondissement…) — отдельным seed по прецедентам.  
+- Legacy `sovereign_*` не DELETE. VIEW «дерево L» — после стабилизации DAG.
 
 ---
 
@@ -188,6 +190,7 @@ Kind v0: `full`, `short`. Расширения (`honor`, `map`, …) — чер�
 | DDL `018` + VIEW effective | ✅ 2026-11-27 |
 | Seed kind + периоды/full DE·AT·JP | ✅ |
 | Прецедент `org_num` (округ / дивизия) | ☐ |
+| DAG титулов + имена `brandenburg` | ✅ `019` 2026-11-27 ([title_tree](26-1127_name_form_title_tree.md)) |
 | Период AT после 1867 (Австро-Венгрия) | ☐ — пока `kaisertum` effective_to = trm Absorb 1938 |
 
 **Замечание AT:** без следующего `org_name_form` после 1867-06-08 конец периода тянется до `austria.trm` (1938-03-13). Уточнить отдельным периодом формулы, когда появится seed Австро-Венгрии.

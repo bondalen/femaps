@@ -3,14 +3,15 @@
 **Чат:** 26-1124_01_org_lifecycle  
 **Дата создания:** 2026-11-24  
 **Последнее обновление:** 2026-11-27  
-**Версия плана:** 0.4.7  
-**Статус:** 🔶 in-progress — ★ **1.8** имена DDL ✅ (`018`); `org_num` прецедент ☐ ‖ связи ✅; 2.4 ⏸  
+**Версия плана:** 0.4.9  
+**Статус:** 🔶 in-progress — имена ✅ (`018`/`019` brandenburg); ‖ `org_num` / `brandenburg`⊂DE ☐; 2.4 ⏸  
 
 **Стек:** PostgreSQL 16 / PostGIS — `maps_db`, schema **`org`**, порт **5434** (геометрия не используется).  
 **Источник каркаса:** MS SQL `FishEye` / `FishEye_prod_noM6`, `ags.rgTax*` / `rgTaxReor*` (Cursor DBHub).  
 **Канон решений:** [docs/org/26-1124_org_lifecycle_iteration0.md](../../org/26-1124_org_lifecycle_iteration0.md)  
 **ER ЖЦ:** [docs/org/26-1124_org_lifecycle_er.md](../../org/26-1124_org_lifecycle_er.md)  
 **ER имён (1.8):** [docs/org/26-1127_org_name.md](../../org/26-1127_org_name.md)  
+**DAG титулов:** [docs/org/26-1127_name_form_title_tree.md](../../org/26-1127_name_form_title_tree.md)  
 **DDL:** [scripts/sql/013_org_lifecycle.sql](../../../scripts/sql/013_org_lifecycle.sql)  
 **Предыстория форм:** [sovereign_transformation.md](../../org/sovereign_transformation.md) · [sovereign_class_diagram.md](../../org/sovereign_class_diagram.md)  
 **Соседний контур имён:** [26-1029_01_states_orgs.md](26-1029_01_states_orgs.md) (фаза A `name_form` — стык через 1.8)
@@ -98,7 +99,11 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 │  │  │        · num INT; имя строки опционально (композит полка+num)
 │  │  ├─ 1.8.2 DDL + VIEW effective + seed DE/AT/JP            ✅ 2026-11-27
 │  │  │        · scripts/sql/018_org_name.sql applied
-│  │  └─ 1.8.3 Прецедент с org_num (округ / дивизия)           ☐ ‖
+│  │  ├─ 1.8.3 DAG титулов (княз./герц./mark/freistaat)        ✅ 2026-11-27
+│  │  │        · 019: name_form + labels + edges
+│  │  ├─ 1.8.4 Имена brandenburg на новом DAG                  ✅ 2026-11-27
+│  │  │        · mark→electorate→kingdom→freistaat; full+short
+│  │  └─ 1.8.5 Прецедент org_num (округ / дивизия)             ☐ ‖
 │  ├─ 1.9 Apply 013 на maps_db + VERIFY                        ✅ 2026-11-25
 │  │  ├─ 1.9.1 TCP/auth maps_db @ 10.7.0.3:5434                ✅
 │  │  ├─ 1.9.2 node/pg apply 013_org_lifecycle.sql             ✅
@@ -137,10 +142,10 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 **Ось дальше (не class sync):**
 
 ```text
-ЖЦ Reor ✅  →  связи v0 ✅  →  имена DDL ✅  →  ‖ 1.8.3 num / 3.3+  →  2.4 sync  →  4…
+ЖЦ Reor ✅  →  связи v0 ✅  →  имена ✅ (DDL+DAG+brandenburg)  →  ‖ num / 3.3+  →  2.4…
 ```
 
-**Сейчас:** ‖ **1.8.3** `org_num` и/или **3.3+** `brandenburg`⊂`germany`.
+**Сейчас:** ‖ **1.8.5** `org_num` и/или **3.3+** `brandenburg`⊂`germany`.
 
 ---
 
@@ -175,13 +180,15 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | [26-1126_org_rel.md](../../org/26-1126_org_rel.md) | ER связей v0 |
 | [015_org_rel.sql](../../../scripts/sql/015_org_rel.sql) | DDL `org_rel` + VIEW + seed |
 | [26-1127_org_name.md](../../org/26-1127_org_name.md) | ER имён: форма × num × опц. строки; valid_from-only |
+| [26-1127_name_form_title_tree.md](../../org/26-1127_name_form_title_tree.md) | DAG самоназваний: княз./герц./марка/Freistaat |
 | [018_org_name.sql](../../../scripts/sql/018_org_name.sql) | DDL имён + VIEW + seed DE/AT/JP |
+| [019_name_form_titles_brandenburg.sql](../../../scripts/sql/019_name_form_titles_brandenburg.sql) | seed DAG титулов + имена brandenburg |
 
 ---
 
 ## 5. Следующий конкретный шаг
 
-★ / ‖ **1.8.3** — прецедент `org_num`; **3.3+** — `brandenburg` ⊂ `germany`; Польша DivisAcqu.  
+‖ **1.8.5** — прецедент `org_num`; **3.3+** — `brandenburg` ⊂ `germany`; Польша DivisAcqu.  
 **2.4** class sync — после стабилизации имён.
 
 ---
@@ -204,3 +211,5 @@ DSN remote: `postgresql://maps_user:maps_pass@10.7.0.3:5434/maps_db`.
 | 2026-11-26 | Apply `017`: saxon_east/brandenburg/prussia_duchy; part_of 1701; DivisAcqu→ussr; план 0.4.5. |
 | 2026-11-27 | ER имён 1.8 (26-1127): org_name_form→name/num; valid_from; num INT для ВС и гражданских; план 0.4.6. |
 | 2026-11-27 | Apply `018` OK; seed full DE/AT/JP; план 0.4.7; ★ → 1.8.3 / 3.3+. |
+| 2026-11-27 | Эскиз DAG титулов (+герцогства); покрытие brandenburg; план 0.4.8. |
+| 2026-11-27 | Apply `019` OK; DAG + имена brandenburg 965…1947; план 0.4.9. |

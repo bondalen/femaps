@@ -15,7 +15,9 @@
 | [26-1124_org_lifecycle_iteration0.md](26-1124_org_lifecycle_iteration0.md) | Канон итерации 0 (**закрыта**): `org` + ЖЦ + `Reor*`; convert = same id |
 | [26-1124_org_lifecycle_er.md](26-1124_org_lifecycle_er.md) | ER Postgres: лицо + frm/trm + Reor*; прецеденты AT→DE, Japan |
 | [26-1127_org_name.md](26-1127_org_name.md) | ER имён под `org`: периоды формулы, опц. строки, `org_num` (INT) |
+| [26-1127_name_form_title_tree.md](26-1127_name_form_title_tree.md) | DAG самоназваний: княжество/герцогство/марка/Freistaat |
 | `scripts/sql/018_org_name.sql` | DDL `org_name_*` + effective VIEW + seed DE/AT/JP |
+| `scripts/sql/019_name_form_titles_brandenburg.sql` | Seed DAG титулов + периоды/имена brandenburg |
 | `scripts/sql/010_org_name_forms.sql` | DDL `name_form` / legacy sovereign |
 | `scripts/sql/013_org_lifecycle.sql` | DDL ЖЦ `org` + Reor* + seed AT/DE/JP |
 | `scripts/sql/014_org_precedents_kievan_line.sql` | Seed kiev→vladimir→moscow (Separ/Absorb); календарь A |
