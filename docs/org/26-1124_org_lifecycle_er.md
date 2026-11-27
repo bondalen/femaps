@@ -7,7 +7,8 @@
 **Прецеденты Русь:** [26-1125_google_org_chat.md](../26-1125_google_org_chat.md).
 
 **Объём этого документа:** лицо + справочники frm/trm + таблицы реорганизации.  
-**Вне объёма:** имена (`rgTaxName*`), Membership / `part_of`, оккупация, `org_type`, связь с legacy `org.sovereign` (таблицу `sovereign` не трогаем — устаревшая).
+**Имена под `org`:** [26-1127_org_name.md](26-1127_org_name.md) (итерация 1.8; DDL отдельно).  
+**Вне объёма этого файла:** Membership / `part_of` ([26-1126_org_rel.md](26-1126_org_rel.md)), оккупация, `org_type`; legacy `org.sovereign` не трогаем.
 
 ---
 
